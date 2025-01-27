@@ -2,12 +2,12 @@
   "sqltools.connections": [
     {
       "mysqlOptions": {
-        "authProtocol": "xprotocol",
+        "authProtocol": "default",
         "enableSsl": "Disabled"
       },
       "previewLimit": 50,
       "server": "localhost",
-      "port": 33060,
+      "port": 3306,
       "driver": "MySQL",
       "name": "final-project",
       "database": "havenmind",
