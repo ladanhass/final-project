@@ -2,9 +2,6 @@
 <html lang="en">
   <head>
     <title>Title</title>
-    <div class="container mt-5">
-    <!-- css stylesheet-->
-    <link rel="stylesheet" type="text/css" href="/main.css" />
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -18,14 +15,56 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <!--font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+     <!-- css stylesheet-->
+     <link rel="stylesheet" href="/main.css">
   </head>
-
-  <body>
-    <header>LOGIN</header>
-    <main>
-
-    </main>
-
+    <!-- picture-->
+    <div class="container-fluid p-0 m-0">
+        <div class="row"> 
+        <div class=" col-12 col-md-6 p-0  d-none d-md-block">
+            <img src="/images/picture.webp" alt="side-picture" class="img-fluid picture-side">
+        </div>
+        <!--form layout-->
+        <div class="col-12 col-md-5">
+       <div class="d-flex flex-column justify-content-center align-items-center mb-4" >
+        <img src="/images/final-logo.png" alt="logo" class="image-fluid  logo-style">
+        <h1 class="mb-3 register-title"> Create an Account </h1>
+        </div>
+        <!--first name input-->
+        <form method="POST" action="registered">
+            <div class="mb-3">
+                <label for="first name" class="form-label">First Name</label>
+                <input id="first" type="text" name="first" class="form-control " required placeholder="First Name">
+            </div>
+        <!--Last name input-->
+            <div class="mb-3">
+                <label for="last name" class="form-label">Last Name</label>
+                <input id="last" type="text" name="last" class="form-control" required placeholder="Last Name">
+                </div>
+        <!--email input-->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" type="text" name="email" class="form-control" required placeholder="email@email.com">
+            </div>
+        <!--password input-->
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input id="password" type="password" name="plainPassword" class="form-control" required placeholder="password">
+            </div>
+            <!--form submit button-->
+            <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-primary btn-register" value="Register">
+            </div>
+            <p class=" register-link">Already have an account?<a href="/login">Login</a></p>
+        </form>
+    </div>
+       </div>
+    </div>
+</div>
 
 
 
