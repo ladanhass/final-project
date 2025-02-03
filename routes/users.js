@@ -1,8 +1,130 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const { check, validationResult } = require("express-validator");
 
-// register is home page
-router.get("/", (req, res) => {
-  res.render("register.ejs");
+// render home page
+router.get("/", (req, res, next) => {
+  res.render("register.ejs", { alert: [] });
 });
+//renders login page
+router.get("/login", (req, res, next) => {
+  res.render("login.ejs");
+});
+
+// handles registration form input validation
+router.post(
+  "/registered",
+  [
+    check("email")
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("Provide a valid email"),
+    check("plainPassword")
+      .isLength({ min: 8 })
+      .withMessage("Password must be at least 8 characters long")
+      .isAlphanumeric()
+      .withMessage("Password must only contain letters and numbers"),
+    check("first")
+      .notEmpty()
+      .trim()
+      .escape()
+      .withMessage("First name cannot be empty"),
+    check("last")
+      .notEmpty()
+      .trim()
+      .escape()
+      .withMessage("last name cannot be empty"),
+  ],
+  //checks validation
+  function (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render("register", { alert: errors.array() });
+    }
+
+    //sanitize inputs
+    const plainPassword = req.body.plainPassword;
+    const firstName = req.body.first.trim();
+    const lastName = req.body.last.trim();
+    const email = req.body.email.trim();
+
+    //check if email if already have an account
+    let emailCheckQuery = "SELECT * FROM users WHERE email = ?";
+    db.query(emailCheckQuery, [email], (err, result) => {
+      if (err) {
+        return next(err);
+      }
+      if (result.length > 0) {
+        return res.render("register", {
+          alert: [{ msg: " email is already in use" }],
+        });
+      }
+      //hashes users password saves to database
+      bcrypt.hash(plainPassword, saltRounds, function (err, hashedPassword) {
+        if (err) {
+          return next(err);
+        }
+        // inserts new users info into database
+        let sqlquery =
+          "INSERT INTO users (first_name, last_name, email, hashedPassword) VALUES (?,?,?,?)";
+        let newRecord = [firstName, lastName, email, hashedPassword];
+
+        db.query(sqlquery, newRecord, (err, result) => {
+          if (err) {
+            return next(err);
+          }
+          //redirectes users to login page
+          return res.redirect("login");
+        });
+      });
+    });
+  }
+);
+//login
+router.post(
+  " /loggedin",
+  [
+    check("email")
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("Provide a valid email adress"),
+  ],
+  function (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render("login", { alert: errors.array() });
+    }
+    const plainPassword = req.body.plainPassword;
+    const email = req.body.email.normalizeEmail().trim();
+
+    let sqlquery = "SELECT FROM users WHERE email = ?";
+    db.query(sqlquery, [email], (err, result) => {
+      if (err) {
+        return next(err);
+      }
+      if (result.length === 0) {
+        return res.render("login", {
+          alert: [{ msg: "Email not found. Please register" }],
+        });
+      }
+      const hashedPassword = result[0].hashedPassword;
+      bcrypt.compare(plainPassword, hashedPassword, function (err, isMatch) {
+        if (err) {
+          return next(err);
+        }
+        if (isMatch) {
+          req.session.userId = result[0].id;
+          return res.render("journal");
+        } else {
+          return res.render("login", {
+            alert: [{ msg: "Login failed. Incorrect Password" }],
+          });
+        }
+      });
+    });
+  }
+);
+
 module.exports = router;

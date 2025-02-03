@@ -32,7 +32,7 @@
         <div class="col-12 col-md-5">
        <div class="d-flex flex-column justify-content-center align-items-center mb-4" >
         <img src="/images/final-logo.png" alt="logo" class="image-fluid  logo-style">
-        <h1 class="mb-3 register-title"> Create an Account </h1>
+        <h1 class="mb-3 register-title">Login</h1>
         </div>
         <!--Display alert-->
         <% if (typeof alert != 'undefined' && alert.length > 0){ %>
@@ -52,16 +52,7 @@
        <% } %>
         <!--form-->
         <!--first name input-->
-        <form method="POST" action="/registered">
-            <div class="mb-3">
-                <label for="first name" class="form-label">First Name</label>
-                <input id="first" type="text" name="first" class="form-control " required placeholder="First Name">
-            </div>
-        <!--Last name input-->
-            <div class="mb-3">
-                <label for="last name" class="form-label">Last Name</label>
-                <input id="last" type="text" name="last" class="form-control" required placeholder="Last Name">
-                </div>
+        <form method="POST" action="/loggedin">
         <!--email input-->
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
@@ -76,7 +67,7 @@
             <div class="d-flex justify-content-center">
             <input type="submit" class="btn btn-primary btn-register" value="Login">
             </div>
-            <p class="register-link">Already have an account?<a href="/login">Login</a></p>
+            <p class="register-link">Don't have an account?<a href="/">Register</a></p>
         </form>
     </div>
        </div>
