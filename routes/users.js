@@ -10,9 +10,16 @@ router.get("/", (req, res, next) => {
 });
 //renders login page
 router.get("/login", (req, res, next) => {
-  res.render("login.ejs");
+  res.render("login.ejs", { alert: [] });
 });
 
+const redirectLogin = (req, res, next) => {
+  if (!req.session.userId) {
+    res.render("./login");
+  } else {
+    next();
+  }
+};
 // handles registration form input validation
 router.post(
   "/registered",
@@ -26,16 +33,8 @@ router.post(
       .withMessage("Password must be at least 8 characters long")
       .isAlphanumeric()
       .withMessage("Password must only contain letters and numbers"),
-    check("first")
-      .notEmpty()
-      .trim()
-      .escape()
-      .withMessage("First name cannot be empty"),
-    check("last")
-      .notEmpty()
-      .trim()
-      .escape()
-      .withMessage("last name cannot be empty"),
+    check("first").notEmpty().trim().withMessage("First name cannot be empty"),
+    check("last").notEmpty().trim().withMessage("last name cannot be empty"),
   ],
   //checks validation
   function (req, res) {
@@ -82,38 +81,45 @@ router.post(
     });
   }
 );
-//login
+//login handles login requests
 router.post(
-  " /loggedin",
+  "/loggedin",
   [
+    // validates email format and normalises it
     check("email")
       .isEmail()
       .normalizeEmail()
       .withMessage("Provide a valid email adress"),
   ],
-  function (req, res) {
+  function (req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      // shows errors on login page
       return res.render("login", { alert: errors.array() });
     }
+    // gets passwords and email form request
     const plainPassword = req.body.plainPassword;
-    const email = req.body.email.normalizeEmail().trim();
+    const email = req.body.email.trim(); // trims spaces from email
 
-    let sqlquery = "SELECT FROM users WHERE email = ?";
+    //finds the users email
+    let sqlquery = "SELECT * FROM users WHERE email = ?";
     db.query(sqlquery, [email], (err, result) => {
       if (err) {
         return next(err);
       }
+      // shows allert if email is not found
       if (result.length === 0) {
         return res.render("login", {
           alert: [{ msg: "Email not found. Please register" }],
         });
       }
+      //compares password to passwords stored in database
       const hashedPassword = result[0].hashedPassword;
       bcrypt.compare(plainPassword, hashedPassword, function (err, isMatch) {
         if (err) {
           return next(err);
         }
+        //checks if password is correct compares redirect to pages
         if (isMatch) {
           req.session.userId = result[0].id;
           return res.render("journal");
@@ -126,5 +132,17 @@ router.post(
     });
   }
 );
+
+//logout route (so users can logout)
+router.post("/logout", redirectLogin, (req, res) => {
+  //session is destroyed when logged out
+  req.session.destroy((err) => {
+    if (err) {
+      return res.redirect("./");
+    }
+    //when logged out redirects to login page
+    res.redirect("./login");
+  });
+});
 
 module.exports = router;
