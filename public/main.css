@@ -4,25 +4,24 @@ body {
   padding: 0;
   background-color: #a1d7f4;
 }
-
-/*register input*/
+/*--------------------------------------Register and login styles --------------------------*/
+/*login and register form input*/
 input.form-control {
   background-color: #a1d7f4;
   border-color: #575dfb;
 }
-
-.register-title {
+.auth-title {
   color: #575dfb;
   font-family: "Inter", serif;
 }
 /*responsive button*/
-.btn-register {
+.btn-auth {
   background-color: #575dfb;
   text-decoration: underline;
   max-width: 500px;
   width: 100%;
 }
-/*register page side image*/
+/*register & login page side image*/
 .picture-side {
   width: 100%;
   height: 100vh;
@@ -30,14 +29,22 @@ input.form-control {
   border-radius: 20px;
 }
 
-.register-link {
+/* register and login links */
+.auth-link {
   color: black;
   text-align: center;
 }
-.register-link a {
+.auth-link a {
   color: #575dfb;
 }
+/*logo style*/
 .logo-style {
   width: 50%;
   height: auto;
 }
+.alert-warning {
+  background-color: #b3c5f5;
+  color: #575dfb;
+  border-color: #575dfb;
+}
+/*----------------------------------------------- WEB nav bar ---------------------*/

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>Register</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -29,10 +29,10 @@
             <img src="/images/picture.webp" alt="side-picture" class="img-fluid picture-side">
         </div>
         <!--form layout-->
-        <div class="col-12 col-md-5">
+        <div class="col-12 col-md-5 ">
        <div class="d-flex flex-column justify-content-center align-items-center mb-4" >
         <img src="/images/final-logo.png" alt="logo" class="image-fluid  logo-style">
-        <h1 class="mb-3 register-title"> Create an Account </h1>
+        <h1 class="mb-3 auth-title"> Create an Account </h1>
         </div>
         <!--Display alert-->
         <% if (typeof alert != 'undefined' && alert.length > 0){ %>
@@ -74,9 +74,9 @@
             </div>
             <!--form submit button-->
             <div class="d-flex justify-content-center">
-            <input type="submit" class="btn btn-primary btn-register" value="Register">
+            <input type="submit" class="btn btn-primary btn-auth" value="Register">
             </div>
-            <p class="register-link">Already have an account?<a href="/login">Login</a></p>
+            <p class="auth-link">Already have an account?<a href="/login">Login</a></p>
         </form>
     </div>
        </div>

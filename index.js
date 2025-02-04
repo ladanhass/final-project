@@ -7,7 +7,7 @@ require("dotenv").config();
 
 //port and initialise
 const app = express();
-const port = 8019;
+const port = 8020;
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
