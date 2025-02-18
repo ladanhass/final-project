@@ -48,3 +48,14 @@ input.form-control {
   border-color: #575dfb;
 }
 /*----------------------------------------------- WEB nav bar ---------------------*/
+.nav-logo {
+  height: 80px;
+  width: auto;
+}
+.nav-page {
+  display: flex;
+  background-color: #a0a3f8 !important;
+  border-radius: 0 0 25px 25px;
+  height: 80px;
+  align-items: center;
+}
