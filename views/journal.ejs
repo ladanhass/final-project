@@ -25,19 +25,55 @@
     <!-- css stylesheet-->
     <link rel="stylesheet" href="/main.css" />
   </head>
-
+<!-- 
   <form action="/logout" method="POST">
     <button type="submit" class="btn-logout">logout</button>
-  </form>
+  </form> -->
+
   <body>
     <nav class="navbar navbar-light bg-light nav-page">
-      <div class="container">
+      <div class="container-fluid">
         <a class="navbar-brand" href="#">
-          <img src="/images/final-logo.png" alt="logo" class="nav-logo" />
+          <img src="/images/final-logo (2).png" alt="logo" class="nav-logo" />
         </a>
       </div>
     </nav>
-
+    <!---weekly journal-->
+    <div class="container mt-5">
+      <h2 class="text-center mb-4">Weekly Journal</h2>
+      <div class=" row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+      <div class="list-group text-center mt-4">
+      <button class="list-group-item list-group-item-action btn-journalList " data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Monday">Monday</button>
+      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Tuesday">Tuesday</button>
+      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Wednesday">Wednesday</button>
+      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Thursday">Thursday</button>
+      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Friday">Friday</button>
+      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Saturday">Saturday</button>
+      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Sunday">Sunday</button>
+    </div>
+  </div>
+</div>
+</div>
+  <!--Modal-->
+  <div class="modal fade" id="journalModal" tabindex="-1" aria-labelledby="modalJournalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="modalJournalLabel">Journal Entry</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"> </button>
+      </div>
+      <div class="modal-body">
+        <p>Today's Date:<%= new Date().toLocaleDateString() %></p>
+        <label for="journalEntry" class="form-label">Write your thoughts here:</label>
+        <textarea id="journalEntry" class="form-control" rows="8"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
     <!-- Bootstrap JavaScript Libraries -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

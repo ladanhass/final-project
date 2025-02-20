@@ -49,8 +49,8 @@ input.form-control {
 }
 /*----------------------------------------------- WEB nav bar ---------------------*/
 .nav-logo {
-  height: 80px;
-  width: auto;
+ height: 60px;
+width: auto;
 }
 .nav-page {
   display: flex;
@@ -58,4 +58,16 @@ input.form-control {
   border-radius: 0 0 25px 25px;
   height: 80px;
   align-items: center;
+  justify-content: center;
+}
+/*-------------------------------journal page-----------------------------------*/
+.btn-journalList{
+  background-color:  #a1a5eebe !important;
+  font-family: "Inter", serif;
+  color: rgba(0, 0, 0, 0.556)  !important;
+  font-size: 25px;
+  margin: 8px 0;
+  border-radius: 60px !important;
+ border: none !important;
+ font-weight: 190;
 }
