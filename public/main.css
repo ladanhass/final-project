@@ -61,13 +61,18 @@ width: auto;
   justify-content: center;
 }
 /*-------------------------------journal page-----------------------------------*/
-.btn-journalList{
+
+.accordion-item{
+  margin-bottom: 15px;
+  border-radius: 15px;
+  overflow: hidden;
+  border: none !important;
+}
+.accordion-button{
   background-color:  #a1a5eebe !important;
   font-family: "Inter", serif;
   color: rgba(0, 0, 0, 0.556)  !important;
   font-size: 25px;
-  margin: 8px 0;
-  border-radius: 60px !important;
  border: none !important;
  font-weight: 190;
 }

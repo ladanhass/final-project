@@ -4,24 +4,13 @@
     <title>Journal</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Bootstrap CSS v5.2.1 -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
     <!--font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <!-- css stylesheet-->
     <link rel="stylesheet" href="/main.css" />
   </head>
@@ -29,7 +18,6 @@
   <form action="/logout" method="POST">
     <button type="submit" class="btn-logout">logout</button>
   </form> -->
-
   <body>
     <nav class="navbar navbar-light bg-light nav-page">
       <div class="container-fluid">
@@ -38,42 +26,119 @@
         </a>
       </div>
     </nav>
-    <!---weekly journal-->
+    <!---weekly journal drop-down-->
     <div class="container mt-5">
       <h2 class="text-center mb-4">Weekly Journal</h2>
-      <div class=" row justify-content-center">
-      <div class="col-md-8 col-lg-6">
-      <div class="list-group text-center mt-4">
-      <button class="list-group-item list-group-item-action btn-journalList " data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Monday">Monday</button>
-      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Tuesday">Tuesday</button>
-      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Wednesday">Wednesday</button>
-      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Thursday">Thursday</button>
-      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Friday">Friday</button>
-      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Saturday">Saturday</button>
-      <button class="list-group-item list-group-item-action btn-journalList" data-bs-toggle="modal" data-bs-target="#journalModal" data-day="Sunday">Sunday</button>
-    </div>
-  </div>
-</div>
-</div>
-  <!--Modal-->
-  <div class="modal fade" id="journalModal" tabindex="-1" aria-labelledby="modalJournalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="modalJournalLabel">Journal Entry</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"> </button>
-      </div>
-      <div class="modal-body">
-        <p>Today's Date:<%= new Date().toLocaleDateString() %></p>
-        <label for="journalEntry" class="form-label">Write your thoughts here:</label>
-        <textarea id="journalEntry" class="form-control" rows="8"></textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
+       <div class="accordion" id="journalAccordion">
+         <!---Monday-->
+        <div class="accordion-item" id="monday">
+          <h2 class="accordion-header">
+            <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseMonday">
+              Monday
+            </button>
+          </h2>
+          <div id="collapseMonday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
+            <div class="accordion-body">
+              <textarea class="form-control journal-entry" rows="4" data-day="Monday"></textarea>
+              <button class="btn btn-primary save-btn mt-2" data-day="Monday">Save</button>
+            </div>
+          </div>
+        </div>
+         <!---Tuesday-->
+            <div class="accordion-item" id="tuesday">
+              <h2 class="accordion-header">
+                <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseTuesday">
+                  Tuesday
+                </button>
+              </h2>
+              <div id="collapseTuesday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
+                <div class="accordion-body">
+                  <textarea class="form-control journal-entry" rows="4" data-day="Tuesday"></textarea>
+                  <button class= "btn btn-primary save-btn mt-2" data-day="Tuesday">Save</button>
+                </div>
+              </div>
+            </div>
+             <!---Wednesday-->
+              <div class="accordion-item" id="wednesday">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseWednesday">
+                    Wednesday
+                  </button>
+                </h2>
+                <div id="collapseWednesday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
+                  <div class="accordion-body">
+                    <textarea class="form-control journal-entry" rows="4" data-day="Wednesday"></textarea>
+                    <button class= "btn btn-primary save-btn mt-2" data-day="Wednesday">Save</button>
+                  </div>
+                </div>
+              </div>
+               <!---Thursday-->
+                <div class="accordion-item" id="thursday">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseThursday">
+                      Thursday
+                    </button>
+                  </h2>
+                  <div id="collapseThursday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
+                    <div class="accordion-body">
+                      <textarea class="form-control journal-entry" rows="4" data-day="Thursday"></textarea>
+                      <button class="btn btn-primary save-btn mt-2" data-day="Thursday">Save</button>
+                    </div>
+                  </div>
+                </div>
+                 <!---Friday-->
+                  <div class="accordion-item" id="friday">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseFriday">
+                        Friday
+                      </button>
+                    </h2>
+                    <div id="collapseFriday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
+                      <div class="accordion-body">
+                        <textarea class="form-control journal-entry" rows="4" data-day="Friday"></textarea>
+                        <button class="btn btn-primary save-btn mt-2" data-day="Friday">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                   <!---Saturday-->
+                    <div class="accordion-item" id="saturday">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseSaturday">
+                          Saturday
+                        </button>
+                      </h2>
+                      <div id="collapseSaturday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
+                        <div class="accordion-body">
+                          <textarea class="form-control journal-entry" rows="4" data-day="Saturday"></textarea>
+                          <button class= "btn btn-primary save-btn mt-2" data-day="Saturday">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                     <!---sunday-->
+                      <div class="accordion-item" id="sunday">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseSunday">
+                            Sunday
+                          </button>
+                        </h2>
+                        <div id="collapseSunday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
+                          <div class="accordion-body">
+                            <textarea class="form-control journal-entry" rows="4" data-day="Sunday"></textarea>
+                            <button class="btn btn-primary save-btn mt-2" data-day="Sunday">Save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+ 
+  
+
+<!--Today's Date:<%= new Date().toLocaleDateString() %> -->
     <!-- Bootstrap JavaScript Libraries -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
