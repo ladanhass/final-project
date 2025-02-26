@@ -49,24 +49,38 @@ input.form-control {
 }
 /*----------------------------------------------- WEB nav bar ---------------------*/
 .nav-logo {
- height: 60px;
+ height: 70px;
 width: auto;
 }
 .nav-page {
   display: flex;
-  background-color: #a0a3f8 !important;
+  background-color: #4E79F4 !important;
   border-radius: 0 0 25px 25px;
   height: 80px;
   align-items: center;
   justify-content: center;
+  
+}
+.navbar-nav{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.navbar-nav .nav-link{
+  color: white !important;
+  font-family: "Inter", serif;
+}
+.navbar-nav .nav-link:hover {
+  color: #49CDDC !important;
+  
 }
 /*-------------------------------journal page-----------------------------------*/
-
+/*journal days*/
 .accordion-item{
   margin-bottom: 15px;
-  border-radius: 15px;
-  overflow: hidden;
+  border-radius: 15px !important;
   border: none !important;
+  overflow: hidden;
 }
 .accordion-button{
   background-color:  #a1a5eebe !important;
@@ -75,4 +89,17 @@ width: auto;
   font-size: 25px;
  border: none !important;
  font-weight: 190;
+}
+/*journal drop-down*/
+.accordion-collapse{
+  background-color: #e2e3f4;
+}
+/*journal entry area */
+.journal-entry{
+  background-color:#c9c9f7;
+  border:none;
+}
+/*journal entry save btn */
+.save-btn{
+  background-color: #4E79F4 !important;;
 }

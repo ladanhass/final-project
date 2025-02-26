@@ -19,16 +19,45 @@
     <button type="submit" class="btn-logout">logout</button>
   </form> -->
   <body>
-    <nav class="navbar navbar-light bg-light nav-page">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light nav-page">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
-          <img src="/images/final-logo (2).png" alt="logo" class="nav-logo" />
+          <img src="/images/final-logo (3).png" alt="logo" class="nav-logo" />
         </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+          <div class= "collapse navbar-collapse" id="navbarNav" >
+          <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/journal">Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Mood Tracking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Settings</a>
+          </li>
+        </ul>
       </div>
+    </div>
     </nav>
-    <!---weekly journal drop-down-->
+    <!---weekly journal -->
     <div class="container mt-5">
-      <h2 class="text-center mb-4">Weekly Journal</h2>
+      <div class="row mb-3">
+        <div class="col-12 text-center">
+          <h2><strong>Weekly Journal</strong></h2>
+          <p class="text-muted">A daily practice fo mental clarity and personal growth </p>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-12 text-center">
+          <p><strong> Todays date: </strong>
+            <%= new Date().toLocaleDateString('en-GB', {weekday: 'long', day: 'numeric', month: 'long', year:'numeric'})%></p>
+        </div>
+      </div>
+       <!---weekly journal drop-down-->
        <div class="accordion" id="journalAccordion">
          <!---Monday-->
         <div class="accordion-item" id="monday">
@@ -39,6 +68,7 @@
           </h2>
           <div id="collapseMonday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
             <div class="accordion-body">
+              <label for="modayEntry" class="form-label">Take a moment to reflect on your day.</label>
               <textarea class="form-control journal-entry" rows="4" data-day="Monday"></textarea>
               <button class="btn btn-primary save-btn mt-2" data-day="Monday">Save</button>
             </div>
@@ -53,6 +83,7 @@
               </h2>
               <div id="collapseTuesday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
                 <div class="accordion-body">
+                  <label for="TuesdayEntry" class="form-label">Take a moment to reflect on your day.</label>
                   <textarea class="form-control journal-entry" rows="4" data-day="Tuesday"></textarea>
                   <button class= "btn btn-primary save-btn mt-2" data-day="Tuesday">Save</button>
                 </div>
@@ -67,6 +98,7 @@
                 </h2>
                 <div id="collapseWednesday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
                   <div class="accordion-body">
+                    <label for="WednesdayEntry" class="form-label">Take a moment to reflect on your day.</label>
                     <textarea class="form-control journal-entry" rows="4" data-day="Wednesday"></textarea>
                     <button class= "btn btn-primary save-btn mt-2" data-day="Wednesday">Save</button>
                   </div>
@@ -81,6 +113,7 @@
                   </h2>
                   <div id="collapseThursday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
                     <div class="accordion-body">
+                      <label for="ThurdayEntry" class="form-label">Take a moment to reflect on your day.</label>
                       <textarea class="form-control journal-entry" rows="4" data-day="Thursday"></textarea>
                       <button class="btn btn-primary save-btn mt-2" data-day="Thursday">Save</button>
                     </div>
@@ -95,6 +128,7 @@
                     </h2>
                     <div id="collapseFriday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
                       <div class="accordion-body">
+                        <label for="FridayEntry" class="form-label">Take a moment to reflect on your day.</label>
                         <textarea class="form-control journal-entry" rows="4" data-day="Friday"></textarea>
                         <button class="btn btn-primary save-btn mt-2" data-day="Friday">Save</button>
                       </div>
@@ -109,6 +143,7 @@
                       </h2>
                       <div id="collapseSaturday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
                         <div class="accordion-body">
+                          <label for="SaturdayEntry" class="form-label">Take a moment to reflect on your day.</label>
                           <textarea class="form-control journal-entry" rows="4" data-day="Saturday"></textarea>
                           <button class= "btn btn-primary save-btn mt-2" data-day="Saturday">Save</button>
                         </div>
@@ -123,6 +158,7 @@
                         </h2>
                         <div id="collapseSunday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
                           <div class="accordion-body">
+                            <label for="SundayEntry" class="form-label">Take a moment to reflect on your day.</label>
                             <textarea class="form-control journal-entry" rows="4" data-day="Sunday"></textarea>
                             <button class="btn btn-primary save-btn mt-2" data-day="Sunday">Save</button>
                           </div>
@@ -131,14 +167,6 @@
                     </div>
                   </div>
 
-
-
-
-
- 
-  
-
-<!--Today's Date:<%= new Date().toLocaleDateString() %> -->
     <!-- Bootstrap JavaScript Libraries -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
