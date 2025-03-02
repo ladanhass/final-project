@@ -18,6 +18,7 @@
   <form action="/logout" method="POST">
     <button type="submit" class="btn-logout">logout</button>
   </form> -->
+ <!-- Navbar -->
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light nav-page">
       <div class="container-fluid">
@@ -29,7 +30,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
           <div class= "collapse navbar-collapse" id="navbarNav" >
-          <ul class="navbar-nav mx-auto">
+          <ul class="navbar-nav ">
           <li class="nav-item">
             <a class="nav-link active" href="/journal">Journal</a>
           </li>
@@ -43,11 +44,11 @@
       </div>
     </div>
     </nav>
-    <!---weekly journal -->
+    <!---weekly journal and Mood -->
     <div class="container mt-5">
       <div class="row mb-3">
         <div class="col-12 text-center">
-          <h2><strong>Weekly Journal</strong></h2>
+          <h2><strong>Weekly Journal And Mood</strong></h2>
           <p class="text-muted">A daily practice fo mental clarity and personal growth </p>
         </div>
       </div>
@@ -57,116 +58,40 @@
             <%= new Date().toLocaleDateString('en-GB', {weekday: 'long', day: 'numeric', month: 'long', year:'numeric'})%></p>
         </div>
       </div>
-       <!---weekly journal drop-down-->
+       <!---weekly journal and mood drop-down-->
        <div class="accordion" id="journalAccordion">
-         <!---Monday-->
-        <div class="accordion-item" id="monday">
+        <% const daysOfWeek =['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']; %>
+        <% daysOfWeek.forEach(day => { %>
+        <div class="accordion-item" id="<%= day.toLowerCase() %>">
           <h2 class="accordion-header">
-            <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseMonday">
-              Monday
+            <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapse<%= day %>">
+         <%= day %>
             </button>
           </h2>
-          <div id="collapseMonday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
+         <!--mood drop-down-->
+          <div id="collapse<%= day %>" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
             <div class="accordion-body">
-              <label for="modayEntry" class="form-label">Take a moment to reflect on your day.</label>
-              <textarea class="form-control journal-entry" rows="4" data-day="Monday"></textarea>
-              <button class="btn btn-primary save-btn mt-2" data-day="Monday">Save</button>
+              <label for="<%= day.toLowerCase() %>Mood" class="form-label">Select your mood for today:</label>
+              <select class="form-select mood-select" id="<%= day.toLowerCase() %>Mood" data-day=" <%= day %>">
+                <option value="5">😀 Happy</option>
+                <option value="4">🤩 Excited</option>
+                <option value="3">😐 Neutral</option>
+                <option value="2">😣 Angry</option>
+                <option value="1">😥 Sad</option>
+              </select>
+              <button id="editMood" class="btn btn-primary btn-sm">EDIT</button>
+              <button id="deleteMood" class="btn btn-primary btn-sm" >DELETE</button>
+              <button id="saveMood" class="btn btn-primary btn-sm">SAVE</button>
+        <!--journal entry-->
+              <label for="<%= day.toLowerCase() %>Entry" class="form-label">Take a moment to reflect on your day.</label>
+              <textarea class="form-control journal-entry" rows="4" data-day="<%= day %>"></textarea>
+              <button class="btn btn-primary save-btn mt-2" data-day="<%= day %>">Save</button>
             </div>
           </div>
         </div>
-         <!---Tuesday-->
-            <div class="accordion-item" id="tuesday">
-              <h2 class="accordion-header">
-                <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseTuesday">
-                  Tuesday
-                </button>
-              </h2>
-              <div id="collapseTuesday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
-                <div class="accordion-body">
-                  <label for="TuesdayEntry" class="form-label">Take a moment to reflect on your day.</label>
-                  <textarea class="form-control journal-entry" rows="4" data-day="Tuesday"></textarea>
-                  <button class= "btn btn-primary save-btn mt-2" data-day="Tuesday">Save</button>
-                </div>
-              </div>
-            </div>
-             <!---Wednesday-->
-              <div class="accordion-item" id="wednesday">
-                <h2 class="accordion-header">
-                  <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseWednesday">
-                    Wednesday
-                  </button>
-                </h2>
-                <div id="collapseWednesday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
-                  <div class="accordion-body">
-                    <label for="WednesdayEntry" class="form-label">Take a moment to reflect on your day.</label>
-                    <textarea class="form-control journal-entry" rows="4" data-day="Wednesday"></textarea>
-                    <button class= "btn btn-primary save-btn mt-2" data-day="Wednesday">Save</button>
-                  </div>
-                </div>
-              </div>
-               <!---Thursday-->
-                <div class="accordion-item" id="thursday">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseThursday">
-                      Thursday
-                    </button>
-                  </h2>
-                  <div id="collapseThursday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
-                    <div class="accordion-body">
-                      <label for="ThurdayEntry" class="form-label">Take a moment to reflect on your day.</label>
-                      <textarea class="form-control journal-entry" rows="4" data-day="Thursday"></textarea>
-                      <button class="btn btn-primary save-btn mt-2" data-day="Thursday">Save</button>
-                    </div>
-                  </div>
-                </div>
-                 <!---Friday-->
-                  <div class="accordion-item" id="friday">
-                    <h2 class="accordion-header">
-                      <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseFriday">
-                        Friday
-                      </button>
-                    </h2>
-                    <div id="collapseFriday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
-                      <div class="accordion-body">
-                        <label for="FridayEntry" class="form-label">Take a moment to reflect on your day.</label>
-                        <textarea class="form-control journal-entry" rows="4" data-day="Friday"></textarea>
-                        <button class="btn btn-primary save-btn mt-2" data-day="Friday">Save</button>
-                      </div>
-                    </div>
-                  </div>
-                   <!---Saturday-->
-                    <div class="accordion-item" id="saturday">
-                      <h2 class="accordion-header">
-                        <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseSaturday">
-                          Saturday
-                        </button>
-                      </h2>
-                      <div id="collapseSaturday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
-                        <div class="accordion-body">
-                          <label for="SaturdayEntry" class="form-label">Take a moment to reflect on your day.</label>
-                          <textarea class="form-control journal-entry" rows="4" data-day="Saturday"></textarea>
-                          <button class= "btn btn-primary save-btn mt-2" data-day="Saturday">Save</button>
-                        </div>
-                      </div>
-                    </div>
-                     <!---sunday-->
-                      <div class="accordion-item" id="sunday">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseSunday">
-                            Sunday
-                          </button>
-                        </h2>
-                        <div id="collapseSunday" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
-                          <div class="accordion-body">
-                            <label for="SundayEntry" class="form-label">Take a moment to reflect on your day.</label>
-                            <textarea class="form-control journal-entry" rows="4" data-day="Sunday"></textarea>
-                            <button class="btn btn-primary save-btn mt-2" data-day="Sunday">Save</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
+        <% }); %>
+      </div>
+    </div>
     <!-- Bootstrap JavaScript Libraries -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

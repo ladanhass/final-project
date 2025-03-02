@@ -7,7 +7,7 @@ require("dotenv").config();
 
 //port and initialise
 const app = express();
-const port = 8053;
+const port = 8057;
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -44,5 +44,8 @@ global.db = db;
 //routes for register and login
 const usersRoutes = require("./routes/users");
 app.use("/", usersRoutes);
+const journalMood = require("./routes/journalMood");
+app.use("/journal.ejs", journalMood);
+
 //starts server
 app.listen(port, () => console.log(`Node app listening on port ${port}!`));
