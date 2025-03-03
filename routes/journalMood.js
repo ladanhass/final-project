@@ -31,14 +31,20 @@ router.post("/save-mood", redirectLogin, function(req, res, next){
         }
     });
 });
-router.get("/graph", (req, res) => {
+
+router.get("/graph", redirectLogin, function(req, res, next){
     res.render("graph");
+});
+
+
+router.get("/api/moods", (req, res) => {
+let sqlquery = "SELECT day, mood FROM moods WHERE user_id = ? ORDER BY day";
+    db.query(sqlquery, [req.session.userId], (err, results) =>{
+        if(err){
+            return next(err);
+        }else{
+            res.json(results);
+        }
+    });
   });
-
-
-
-
-
-
-
 module.exports = router;

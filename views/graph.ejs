@@ -49,30 +49,54 @@
                 <div>
                     <canvas id="moodGraph"></canvas>
                   </div>
+                    <script>
+                        // const moods = [
+                        //     {day:"Monday, mood:5"},
+                        //     {day:"Tuesday, mood:2"},
+                        //     {day:"Wednesday, mood:1"},
+                        //     {day:"Thursday, mood:3"},
+                        //     {day:"Friday, mood:4"}
+                        // ];
+                            //console.log(moods);
+                    
+                            fetch("/journal/api/moods")
+                            .then(reponse => reponse.json())
+                            .then(moods => {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                     const labels = moods.map(mood => mood.day);
+                    const data = moods.map(mood => mood.mood);
+                    const ctx = document.getElementById("moodGraph").getContext('2d');
+                    
+                    new Chart(ctx, {
+                        type:'line',
+                        data:{
+                        labels: labels,
+                        datasets:[{
+                            data: data,
+                            label: "Mood",
+                            borderColor:'rgb(75, 192, 192)',
+                            fill: false,
+                            tension: 0.1
+                        }]
+                    },
+                        options: {
+                            responsive:true,
+                            scales: {
+                                y:{
+                                    beginAtZero:true,
+                                    tricks:{
+                                        stepSize: 1,
+                                        max: 5
+                                    }
+                                }
+                            }
+                        }
+                    });
+                 })
+                 .catch(console.error);
+                </script>
+             </div>
+             </div>
 
 
       <!-- Bootstrap JavaScript Libraries -->
