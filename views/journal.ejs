@@ -35,7 +35,7 @@
             <a class="nav-link active" href="/journal">Journal</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Mood Tracking</a>
+            <a class="nav-link" href="/journal/graph">Mood Graph</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Settings</a>
@@ -71,20 +71,22 @@
          <!--mood drop-down-->
           <div id="collapse<%= day %>" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
             <div class="accordion-body">
+              <form action="/journal/save-mood" method="POST">
+                <input type="hidden" name="day" value="<%= day%>">
               <label for="<%= day.toLowerCase() %>Mood" class="form-label">Select your mood for today:</label>
-              <select class="form-select mood-select" id="<%= day.toLowerCase() %>Mood" data-day=" <%= day %>">
+              <select class="form-select mood-select"  name="mood" id="<%= day.toLowerCase() %>Mood" data-day=" <%= day%>" required>
                 <option value="5">😀 Happy</option>
                 <option value="4">🤩 Excited</option>
                 <option value="3">😐 Neutral</option>
                 <option value="2">😣 Angry</option>
                 <option value="1">😥 Sad</option>
               </select>
-              <button id="editMood" class="btn btn-primary btn-sm">EDIT</button>
               <button id="deleteMood" class="btn btn-primary btn-sm" >DELETE</button>
-              <button id="saveMood" class="btn btn-primary btn-sm">SAVE</button>
+              <button type="submit" id="saveMood" class="btn btn-primary btn-sm">SAVE</button>
+            </form>
         <!--journal entry-->
               <label for="<%= day.toLowerCase() %>Entry" class="form-label">Take a moment to reflect on your day.</label>
-              <textarea class="form-control journal-entry" rows="4" data-day="<%= day %>"></textarea>
+              <textarea class="form-control journal-entry" rows="4" data-day="<%= day%>"></textarea>
               <button class="btn btn-primary save-btn mt-2" data-day="<%= day %>">Save</button>
             </div>
           </div>
