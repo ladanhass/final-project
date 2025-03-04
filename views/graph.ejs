@@ -50,20 +50,14 @@
                     <canvas id="moodGraph"></canvas>
                   </div>
                     <script>
-                        // const moods = [
-                        //     {day:"Monday, mood:5"},
-                        //     {day:"Tuesday, mood:2"},
-                        //     {day:"Wednesday, mood:1"},
-                        //     {day:"Thursday, mood:3"},
-                        //     {day:"Friday, mood:4"}
-                        // ];
                             //console.log(moods);
-                    
                             fetch("/journal/api/moods")
                             .then(reponse => reponse.json())
                             .then(moods => {
+                                
+                        
 
-                     const labels = moods.map(mood => mood.day);
+                    const labels = moods.map(mood => mood.day);
                     const data = moods.map(mood => mood.mood);
                     const ctx = document.getElementById("moodGraph").getContext('2d');
                     
@@ -84,21 +78,37 @@
                             scales: {
                                 y:{
                                     beginAtZero:true,
-                                    tricks:{
-                                        stepSize: 1,
-                                        max: 5
+                                    min: 1,
+                                    max:5,
+                                    ticks:{
+                                      stepSize: 1,
+                                      callback: function(value){
+                                        const moodEmojis = {
+                                          5: '😃 Happy',
+                                          4: '🤩 Excited',
+                                          3: '😐 Neutral',
+                                          2: '😣 Angry',
+                                          1: '😥 Sad'
+                                        };
+                                        return moodEmojis[value] || value;
+                                      }
                                     }
+
+                                },
+                                x:{
+                                  title:{
+                                    display:true,
+                                    text: 'Days of the week'
+                                  }
                                 }
                             }
                         }
                     });
-                 })
-                 .catch(console.error);
+                })
+                // .catch(console.error);
                 </script>
              </div>
              </div>
-
-
       <!-- Bootstrap JavaScript Libraries -->
       <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

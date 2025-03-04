@@ -7,13 +7,13 @@ require("dotenv").config();
 
 
 //port and initialise
-const cors = require("cors");
+//const cors = require("cors");
 const app = express();
-const port = 8091;
+const port = 8098;
 
 app.set("view engine", "ejs");
 app.use(express.json());
-app.use(cors());
+//app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 //creates session

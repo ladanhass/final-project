@@ -37,8 +37,11 @@ router.get("/graph", redirectLogin, function(req, res, next){
 });
 
 
-router.get("/api/moods", (req, res) => {
-let sqlquery = "SELECT day, mood FROM moods WHERE user_id = ? ORDER BY day";
+router.get("/api/moods", (req, res, next) => {
+let sqlquery = `SELECT day, mood FROM moods m  WHERE user_id = ? AND id = (
+    SELECT MAX(id) FROM moods WHERE user_id = m.user_id
+    AND day = m.day )
+    ORDER BY day ASC `;
     db.query(sqlquery, [req.session.userId], (err, results) =>{
         if(err){
             return next(err);
