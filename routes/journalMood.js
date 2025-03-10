@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 // const {redirectLogin} = require('./users');
+//middleware function 
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
       res.render("./login");
@@ -8,18 +9,24 @@ const redirectLogin = (req, res, next) => {
       next();
     }
   };
-
+//gets and displays journal page with entries
 router.get("/", redirectLogin,function(req, res){
-    let sqlquery = "SELECT * FROM moods WHERE user_id = ?";
-    db.query(sqlquery, [req.session.userId], (err, results) =>{
+    let sqlqueryMoods = "SELECT * FROM moods WHERE user_id = ?";
+    db.query(sqlqueryMoods, [req.session.userId], (err, moodResults) =>{
         if(err){
             return next(err);
         }
-        res.render("journal", {moods: results, userId: req.session.userId});
-    });
+        let sqlqueryJournal = "SELECT * FROM journal WHERE user_id = ?";
+        db.query(sqlqueryJournal, [req.session.userId], (err, journalResults) =>{
+            if(err){
+                return next(err);
+            }
 
-   
+        res.render("journal", {moods: moodResults, journalResults,userId: req.session.userId});
+    });
 });
+});
+//saves mood entries 
 router.post("/save-mood", redirectLogin, function(req, res, next){
     const{day, mood} = req.body;
     let  sqlquery = "INSERT INTO moods (user_id, day, mood) VALUES (?,?,?) ";
@@ -31,12 +38,24 @@ router.post("/save-mood", redirectLogin, function(req, res, next){
         }
     });
 });
-
+//route to delete mood entry
+router.post("/delete-mood", redirectLogin, function(req, res, next){
+    const{day, mood} = req.body;
+    let  sqlquery = "DELETE FROM moods WHERE user_id = ? AND day= ? ";
+    db.query(sqlquery, [req.session.userId, day], (err, results) =>{
+        if(err){
+            return next(err);
+        }else{
+            res.redirect("/journal");
+        }
+    });
+});
+//renders graph page
 router.get("/graph", redirectLogin, function(req, res, next){
     res.render("graph");
 });
 
-
+//api route to fetch latest moods for each day
 router.get("/api/moods", (req, res, next) => {
 let sqlquery = `SELECT day, mood FROM moods m  WHERE user_id = ? AND id = (
     SELECT MAX(id) FROM moods WHERE user_id = m.user_id
@@ -48,6 +67,18 @@ let sqlquery = `SELECT day, mood FROM moods m  WHERE user_id = ? AND id = (
         }else{
             res.json(results);
         }
+    });
+  });
+
+
+  router.post("/save-entry", redirectLogin, function(req, res,next){
+    const { day, entry} = req.body;
+    let sqlquery= "INSERT INTO journal(user_id, day, entry) VALUES (?,?,?) ";
+    db.query(sqlquery, [req.session.userId , day, entry], (err, results) =>{
+        if(err){
+            return next(err);
+        }
+        res.redirect("/journal");
     });
   });
 module.exports = router;

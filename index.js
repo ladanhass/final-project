@@ -9,7 +9,7 @@ require("dotenv").config();
 //port and initialise
 //const cors = require("cors");
 const app = express();
-const port = 8098;
+const port = 8008;
 
 app.set("view engine", "ejs");
 app.use(express.json());

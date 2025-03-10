@@ -49,12 +49,12 @@ input.form-control {
 }
 /*----------------------------------------------- WEB nav bar ---------------------*/
 .nav-logo {
- height: 70px;
+ height: 60px;
 width: auto;
 }
 .nav-page {
   display: flex;
-  background-color: #4E79F4 !important;
+  background-color: #5c84f1 !important;
   border-radius: 0 0 25px 25px;
   height: 80px;
   align-items: center;
@@ -73,6 +73,12 @@ width: auto;
 .navbar-nav .nav-link:hover {
   color: #49CDDC !important;
   
+}
+.custom-toggler{
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background-color: rgb(174, 223, 236);
 }
 /*-------------------------------journal page-----------------------------------*/
 /*journal days*/
@@ -102,4 +108,23 @@ width: auto;
 /*journal entry save btn */
 .save-btn{
   background-color: #4E79F4 !important;;
+}
+/*Mood entry save btn */
+.mood-button{
+  display:inline-block;
+  background: transparent !important;
+  color: #4E79F4 !important;
+  border: none !important;
+  text-decoration: underline !important;
+
+}
+/*mood dropdown */
+.mood-select{
+  background-color:#c9c9f7;
+  border-radius: 20px;
+}
+
+#moodGraph{
+  background-color: white;
+  border-radius: 20px;
 }

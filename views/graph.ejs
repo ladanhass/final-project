@@ -22,7 +22,7 @@
         <a class="navbar-brand" href="#">
           <img src="/images/final-logo (3).png" alt="logo" class="nav-logo" />
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -50,17 +50,16 @@
                     <canvas id="moodGraph"></canvas>
                   </div>
                     <script>
-                            //console.log(moods);
-                            fetch("/journal/api/moods")
-                            .then(reponse => reponse.json())
-                            .then(moods => {
-                                
-                        
-
+                      //console.log(moods);
+                      //fetches data 
+                      fetch("/journal/api/moods")
+                      .then(reponse => reponse.json())
+                      .then(moods => {
+                    //extracts days and mood values from fetched data
                     const labels = moods.map(mood => mood.day);
                     const data = moods.map(mood => mood.mood);
                     const ctx = document.getElementById("moodGraph").getContext('2d');
-                    
+                    //creates a line graph
                     new Chart(ctx, {
                         type:'line',
                         data:{
@@ -92,6 +91,10 @@
                                         };
                                         return moodEmojis[value] || value;
                                       }
+                                    },
+                                    title:{
+                                      display:true,
+                                      text:'Mood'
                                     }
 
                                 },
