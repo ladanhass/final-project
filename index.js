@@ -50,6 +50,9 @@ const usersRoutes = require("./routes/users");
 app.use("/", usersRoutes);
 const journalMood = require("./routes/journalMood");
 app.use("/journal", journalMood);
+const settingsRoutes = require("./routes/settingsRoutes");
+app.use("/settings", settingsRoutes);
+
 
 //starts server
 app.listen(port, () => console.log(`Node app listening on port ${port}!`));
