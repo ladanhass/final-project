@@ -13,36 +13,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <!-- css stylesheet-->
     <link rel="stylesheet" href="/main.css" />
-     <!--chart.js-->
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light nav-page">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <img src="/images/final-logo (3).png" alt="logo" class="nav-logo" />
-        </a>
-        <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-          <div class= "collapse navbar-collapse" id="navbarNav" >
-          <ul class="navbar-nav ">
-          <li class="nav-item">
-            <a class="nav-link active" href="/journal">Journal</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/journal/graph">Mood Graph</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Settings</a>
-          </li>
-        </ul>
+   <%-include('navbar') %>
+       <!--settings-->
+   <div class="container container-settings mt-5">
+    <h1 class="mb-4">Settings</h1>
+    <h2 class="mb-3">Change Password</h2>
+    <div class="mb-3">
+      <label for="currentPassword" class="form-label">Current Password</label>
+      <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+    </div>
+    <div class="mb-3">
+      <label for="NewPassword" class="form-label">New Password</label>
+      <input type="password" class="form-control" id="NewPassword" name="NewPassword" required>
+    </div>
+    <div class="mb-3">
+      <label for="ConfirmPassword" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" required>
+    </div>
+    <button type="submit" class="btn btn-change btn-primary">Change Password</button>
+   </div>
+
+   <!--logout btn-->
+   <div class="container mt-3">
+   <form action="/logout" method="POST">
+    <button type="submit" class=" btn btn-logout btn-primary">Logout</button>
+  </form>
+</div>
+   <!--delete account btn-->
+<div class="container mt-3">
+<button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"  class="btn btn-delete btn-danger">Delete Acount</button>
+</div>
+   <!--delete modal btn-->
+<div class="modal" tabindex="-1" id="deleteModal" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Acount</h5>
+        <button type="button" class="btn-close"  data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete your account?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-deleteFinal btn-danger">Delete my acount</button>
       </div>
     </div>
-    </nav>
-
-
+  </div>
+</div>
 
 
 

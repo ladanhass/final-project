@@ -128,3 +128,52 @@ width: auto;
   background-color: white;
   border-radius: 20px;
 }
+/*-------------------------------Settings----------------------------------*/
+.container-settings{
+  background-color: #b0dbf2;
+  border-radius: 25px;
+  padding: 40px;
+  max-width: 750px;
+  box-shadow: 0 20px 40px rgb(86, 91, 251 ,1);
+
+}
+.container-settings h1{
+  color: #575dfb;
+  font-family: "Inter", serif;
+  font-size: 50px;
+  font-weight: bold;
+}
+.container-settings h2{
+  color: #575dfb;
+  font-family: "Inter", serif;
+  font-size: 20px;
+}
+.btn-delete{
+  width: 100%;
+  display: block;
+  max-width: 750px;
+  margin: auto;
+  border: 3px solid red;
+  background-color: transparent;
+  color: red;
+}
+.btn-logout{
+  width: 100%;
+  display: block;
+  max-width: 750px;
+  margin: auto;
+  background-color: #575dfb !important;
+}
+.btn-change {
+  width: 100%;
+  display: block;
+  max-width: 750px;
+  margin: auto;
+  background-color: #575dfb !important;
+
+}
+.btn-deleteFinal{
+  border: 3px solid red !important;
+  background-color: transparent !important;
+  color: red !important;
+}
