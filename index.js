@@ -9,7 +9,7 @@ require("dotenv").config();
 //port and initialise
 //const cors = require("cors");
 const app = express();
-const port = 8011;
+const port = 8012;
 
 app.set("view engine", "ejs");
 app.use(express.json());
@@ -52,8 +52,8 @@ const journalMood = require("./routes/journalMood");
 app.use("/journal", journalMood);
 const settingsRoutes = require("./routes/settingsRoutes");
 app.use("/settings", settingsRoutes);
-const excersiseRoutes = require("./routes/excersise");
-app.use("/excersise", excersiseRoutes);
+const exerciseRoutes = require("./routes/exercise");
+app.use("/exercise", exerciseRoutes);
 
 
 //starts server

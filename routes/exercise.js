@@ -10,7 +10,7 @@ const redirectLogin = (req, res, next) => {
   };
 
 router.get("/", redirectLogin, function(req, res, next){
-    res.render("excersise");
+    res.render("exercise");
   });
 
 
