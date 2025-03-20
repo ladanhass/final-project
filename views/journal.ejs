@@ -50,7 +50,8 @@
                <!---stores day of week when submitting form -->
                 <input type="hidden" name="day" value="<%= day%>">
               <label for="<%= day.toLowerCase() %>Mood" class="form-label">Select your mood for today:</label>
-              <select class="form-select mood-select"  name="mood" id="<%= day.toLowerCase() %>Mood" data-day=" <%= day%>" required>
+              <select class="form-select mood-select"  name="mood" id="<%= day.toLowerCase() %>Mood" required data-day=" <%= day%>" >
+                <option value="" disabled selected>Select your mood</option>
                 <option value="5">😀 Happy</option>
                 <option value="4">🤩 Excited</option>
                 <option value="3">😐 Neutral</option>
@@ -67,11 +68,10 @@
             </form>
         <!--journal entry-->
               <form action="/journal/save-entry" method="POST">
-              <input type="hidden" name="day" value="<%= day%>">
+              <input type="hidden" name="day" value="<%= day%>" >
               <label for="<%= day.toLowerCase() %>Entry" class="form-label">Take a moment to reflect on your day.</label>
-              <textarea class="form-control journal-entry" name="entry" rows="4" data-day="<%= day%>">
-              </textarea>
-              <button types="submit" class="btn btn-primary save-btn mt-2" data-day="<%= day %>">Save</button>
+              <textarea class="form-control journal-entry" name="entry" rows="4" data-day="<%= day%>"  > </textarea>
+              <button type="submit" class="btn btn-primary save-btn mt-2" data-day="<%= day %>">Save</button>
             </form>
             </div>
           </div>
