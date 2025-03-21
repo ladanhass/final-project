@@ -70,7 +70,7 @@
               <form action="/journal/save-entry" method="POST">
               <input type="hidden" name="day" value="<%= day%>" >
               <label for="<%= day.toLowerCase() %>Entry" class="form-label">Take a moment to reflect on your day.</label>
-              <textarea class="form-control journal-entry" name="entry" rows="4" data-day="<%= day%>"  > </textarea>
+              <textarea class="form-control journal-entry" name="entry" rows="4" required data-day="<%= day%>"  > </textarea>
               <button type="submit" class="btn btn-primary save-btn mt-2" data-day="<%= day %>">Save</button>
             </form>
             </div>
