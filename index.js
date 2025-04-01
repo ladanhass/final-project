@@ -7,13 +7,15 @@ require("dotenv").config();
 
 
 //port and initialise
-//const cors = require("cors");
 const app = express();
-const port = 8013;
+const port = 8016;
+
+//Used to get iv and key
+require("./utils/encrypt");
+
 
 app.set("view engine", "ejs");
 app.use(express.json());
-//app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 //creates session
