@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 // const {redirectLogin} = require('./users');
+const{ encrypt, decrypt} = require('../utils/encrypt');
+const { check, validationResult } = require("express-validator");
 //middleware function 
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
@@ -71,10 +73,24 @@ let sqlquery = `SELECT day, mood FROM moods m  WHERE user_id = ? AND id = (
   });
 
 
-  router.post("/save-entry", redirectLogin, function(req, res,next){
+  router.post(
+    "/save-entry", 
+    redirectLogin,[
+        check("entry")
+        .trim()
+        .escape()
+        .notEmpty().withMessage("please add entry to save"),
+    ],
+    function(req, res,next){
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.render("journal", { alert: errors.array(), userId: req.session.userId });
+        }
     const { day, entry} = req.body;
+    const sanitizedEntry= entry.trim();
+    const encryptedEntry = encrypt(sanitizedEntry);
     let sqlquery= "INSERT INTO journal(user_id, day, entry) VALUES (?,?,?) ";
-    db.query(sqlquery, [req.session.userId , day, entry], (err, results) =>{
+    db.query(sqlquery, [req.session.userId , day, encryptedEntry], (err, results) =>{
         if(err){
             return next(err);
         }

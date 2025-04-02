@@ -27,14 +27,16 @@ router.post(
     check("email")
       .isEmail()
       .normalizeEmail()
+      .trim()
+      .escape()
       .withMessage("Provide a valid email"),
     check("plainPassword")
       .isLength({ min: 8 })
       .withMessage("Password must be at least 8 characters long")
       .isAlphanumeric()
       .withMessage("Password must only contain letters and numbers"),
-    check("first").notEmpty().trim().withMessage("First name cannot be empty"),
-    check("last").notEmpty().trim().withMessage("last name cannot be empty"),
+    check("first").notEmpty().trim().escape().withMessage("First name cannot be empty"),
+    check("last").notEmpty().trim().escape().withMessage("last name cannot be empty"),
   ],
   //checks validation
   function (req, res) {
@@ -42,12 +44,10 @@ router.post(
     if (!errors.isEmpty()) {
       return res.render("register", { alert: errors.array() });
     }
-
-    //sanitize inputs
     const plainPassword = req.body.plainPassword;
-    const firstName = req.body.first.trim();
-    const lastName = req.body.last.trim();
-    const email = req.body.email.trim();
+    const firstName = req.body.first;
+    const lastName = req.body.last;
+    const email = req.body.email;
 
     //check if email if already have an account
     let emailCheckQuery = "SELECT * FROM users WHERE email = ?";
@@ -89,6 +89,8 @@ router.post(
     check("email")
       .isEmail()
       .normalizeEmail()
+      .trim()
+      .escape()
       .withMessage("Provide a valid email adress"),
   ],
   function (req, res, next) {
@@ -99,7 +101,7 @@ router.post(
     }
     // gets passwords and email form request
     const plainPassword = req.body.plainPassword;
-    const email = req.body.email.trim(); // trims spaces from email
+    const email = req.body.email; 
 
     //finds the users email
     let sqlquery = "SELECT * FROM users WHERE email = ?";

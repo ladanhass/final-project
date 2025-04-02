@@ -43,6 +43,7 @@
          <%= day %>  
             </button>
           </h2>
+          
          <!--mood drop-down-->
           <div id="collapse<%= day %>" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
             <div class="accordion-body">
@@ -59,18 +60,19 @@
                 <option value="1">😥 Sad</option>
               </select>
                 <!---save button which submits mood-->
-              <button type="submit" id="saveMood" class="btn btn-sm mood-button">SAVE</button>
+              <button type="submit" class="btn btn-sm mood-button">SAVE</button>
             </form>
               <!---deletes mood-->
             <form action="/journal/delete-mood" method="POST">
               <input type="hidden" name="day" value="<%= day%>">
-              <button id="deleteMood" class="btn btn-sm mood-button" >DELETE</button>
+              <button type = "submit"  class="btn btn-sm mood-button" >DELETE</button>
             </form>
         <!--journal entry-->
               <form action="/journal/save-entry" method="POST">
               <input type="hidden" name="day" value="<%= day%>" >
               <label for="<%= day.toLowerCase() %>Entry" class="form-label">Take a moment to reflect on your day.</label>
-              <textarea class="form-control journal-entry" name="entry" rows="4" required data-day="<%= day%>"  > </textarea>
+              <textarea class="form-control journal-entry" name="entry" rows="4" id="<%= day.toLowerCase() %>Entry" data-day="<%= day%>"> 
+              </textarea>
               <button type="submit" class="btn btn-primary save-btn mt-2" data-day="<%= day %>">Save</button>
             </form>
             </div>
@@ -78,6 +80,7 @@
         </div>
         <% }); %>
       </div>
+      
     </div>
     <!-- Bootstrap JavaScript Libraries -->
     <script
@@ -85,7 +88,6 @@
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
       crossorigin="anonymous"
     ></script>
-
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
