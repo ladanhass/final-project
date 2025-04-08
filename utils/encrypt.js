@@ -26,6 +26,12 @@ function decrypt(encryptedText){
         ]);
     return decrypted.toString('utf-8');
 }
+// const orginal = "hello is this encrpted and decrpted "
+//  const encryptedText = encrypt(orginal);
+// console.log(encryptedText);
+// const decryptedText = decrypt(encryptedText);
+// console.log(decryptedText);
+
  module.exports = { encrypt, decrypt};
 
 

@@ -32,6 +32,22 @@
             <%= new Date().toLocaleDateString('en-GB', {weekday: 'long', day: 'numeric', month: 'long', year:'numeric'})%></p>
         </div>
       </div>
+      <!--Display alert-->
+      <% if (typeof alert != 'undefined' && alert.length > 0){ %>
+        <% alert.forEach(function(error){ %>
+            <div class=" alert alert-warning alert-dismissible fade show" role="alert">
+                <%= error.msg %>
+                <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="close"
+                >
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+       <% }) %>
+   <% } %>
        <!---weekly journal and mood drop-down-->
        <div class="accordion" id="journalAccordion">
           <!---loops over each day of the week-->
@@ -71,7 +87,7 @@
               <form action="/journal/save-entry" method="POST">
               <input type="hidden" name="day" value="<%= day%>" >
               <label for="<%= day.toLowerCase() %>Entry" class="form-label">Take a moment to reflect on your day.</label>
-              <textarea class="form-control journal-entry" name="entry" rows="4" id="<%= day.toLowerCase() %>Entry" data-day="<%= day%>"> 
+              <textarea class="form-control journal-entry" name="entry" rows="4" id="<%= day.toLowerCase() %>Entry" data-day="<%= day%>" > 
               </textarea>
               <button type="submit" class="btn btn-primary save-btn mt-2" data-day="<%= day %>">Save</button>
             </form>
@@ -80,7 +96,6 @@
         </div>
         <% }); %>
       </div>
-      
     </div>
     <!-- Bootstrap JavaScript Libraries -->
     <script

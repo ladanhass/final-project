@@ -3,15 +3,20 @@ var express = require("express");
 var ejs = require("ejs");
 var session = require("express-session");
 var mysql = require("mysql2");
+const crypto = require('crypto');
 require("dotenv").config();
 
 
 //port and initialise
 const app = express();
-const port = 8035;
+const port = 8033;
 
 //Used to get iv and key
 require("./utils/encrypt");
+//  const key = crypto.randomBytes(16).toString('hex');
+//  const iv = crypto.randomBytes(16).toString('hex');
+// console.log("generate key:" , key);
+// console.log("generate iv:", iv);
 
 
 app.set("view engine", "ejs");

@@ -12,22 +12,42 @@ const redirectLogin = (req, res, next) => {
     }
   };
 //gets and displays journal page with entries
-router.get("/", redirectLogin,function(req, res){
+router.get("/", redirectLogin,function(req, res,next){
     let sqlqueryMoods = "SELECT * FROM moods WHERE user_id = ?";
-    db.query(sqlqueryMoods, [req.session.userId], (err, moodResults) =>{
+    db.query(sqlqueryMoods, [req.session.userId], (err, moodResults) => {
         if(err){
             return next(err);
         }
         let sqlqueryJournal = "SELECT * FROM journal WHERE user_id = ?";
-        db.query(sqlqueryJournal, [req.session.userId], (err, journalResults) =>{
+        db.query(sqlqueryJournal, [req.session.userId], (err, journalResults) => {
             if(err){
                 return next(err);
             }
+            console.log("Journal: ", journalResults);
+            const decryptedEntries = journalResults.length > 0 ? journalResults.map(entry => {
+                console.log("encrpted", entry.entry);
 
-        res.render("journal", {moods: moodResults, journalResults,userId: req.session.userId});
+                const decryptedText= decrypt(entry.entry);
+                console.log("decrypted text", decryptedText);
+                return{
+                    ...entry,
+                    entry:decryptedText
+                };
+            }) : [];
+            console.log("decentries: ", decryptedEntries);
+           
+
+        res.render("journal", {
+            moods: moodResults,
+             journal: decryptedEntries,
+             userId: req.session.userId,
+             alert:[]
+            });
+            });
+        });
     });
-});
-});
+
+
 //saves mood entries 
 router.post("/save-mood", redirectLogin, function(req, res, next){
     const{day, mood} = req.body;
