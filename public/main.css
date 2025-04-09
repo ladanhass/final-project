@@ -184,6 +184,12 @@ width: auto;
   border-radius: 50%;
   background-color:  rgba(230, 230, 250, 0.25);
   animation: time-circle-animation 4s infinite alternate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+  
 }
 
 @keyframes time-circle-animation {
@@ -208,14 +214,42 @@ width: auto;
   text-align: center;
   text-decoration: none !important;
   color: rgb(20, 20, 58);
+  margin-top: 40px;
 }
 .exercise-btns i {
-  font-size: 100px;
+  font-size: 80px;
 }
 .exercise-btns:hover{
   color:#4e01b2
 }
 .exercise-btns span{
-  margin-top: 5px;
-  font-size: 15px;
+  font-size: 10px;
+}
+.exercise-timer{
+  font-size: 32px;
+  font-weight:lighter;
+  font-family: "Inter", serif;
+  
+
+}
+.breathing-text{
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  font-weight:lighter;
+}
+.breathing-exercise h1{
+  color: #575dfb;
+  font-family: "Inter", serif;
+  font-size: 45px;
+  font-weight: bold;
+}
+.breathing-exercise p{
+  color: black;
+  font-family: "Inter", serif;
+  font-size: 20px;
+  font-weight: lighter;
+}
+.custom{
+  margin-top:60px;
 }
