@@ -12,7 +12,7 @@ const redirectLogin = (req, res, next) => {
     }
   };
 //gets and displays journal page with entries
-router.get("/", redirectLogin,function(req, res,next){
+router.get("/", redirectLogin, function (req, res,next){
     let sqlqueryMoods = "SELECT * FROM moods WHERE user_id = ?";
     db.query(sqlqueryMoods, [req.session.userId], (err, moodResults) => {
         if(err){
@@ -23,7 +23,7 @@ router.get("/", redirectLogin,function(req, res,next){
             if(err){
                 return next(err);
             }
-            console.log("Journal: ", journalResults);
+           
             const decryptedEntries = journalResults.length > 0 ? journalResults.map(entry => {
                 console.log("encrpted", entry.entry);
 
@@ -35,6 +35,7 @@ router.get("/", redirectLogin,function(req, res,next){
                 };
             }) : [];
             console.log("decentries: ", decryptedEntries);
+            //console.log("render");
            
 
         res.render("journal", {
@@ -106,6 +107,7 @@ let sqlquery = `SELECT day, mood FROM moods m  WHERE user_id = ? AND id = (
         if (!errors.isEmpty()) {
           return res.render("journal", { alert: errors.array(), userId: req.session.userId });
         }
+        
     const { day, entry} = req.body;
     const sanitizedEntry= entry.trim();
     const encryptedEntry = encrypt(sanitizedEntry);

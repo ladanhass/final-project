@@ -9,7 +9,7 @@ require("dotenv").config();
 
 //port and initialise
 const app = express();
-const port = 8036;
+const port = 8000;
 
 //Used to get iv and key
 require("./utils/encrypt");

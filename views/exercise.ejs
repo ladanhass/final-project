@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <!-- css stylesheet-->
     <link rel="stylesheet" href="/main.css" />
+    <!-- exerciseTimer.js stylesheet-->
+    <script src="/js/exerciseTimer.js"></script>
   </head>
   <body>
    <%-include('navbar') %>
@@ -24,39 +26,38 @@
     <!--Breathing excercise duration options-->
     <div class="mb-4 d-flex justify-content-center align-items-center">
      <p class="mb-0 me-2">Select duration:</p>
-    <div class="dropdown d-inline-block">
-      <button class="btn btn-outline-primary drowpdown-toggle" data-bs-toggle="dropdown" type="button"  aria-expanded="false">
-        5 min
-      </button>
-       <div class="dropdown-menu" >
-        <button class="dropdown-item" type="button">2 min </button>
-        <button class="dropdown-item" type="button">5 min </button>
-        <button class="dropdown-item" type="button">10 min </button>
-        <button class="dropdown-item" type="button">15 min </button>
-        <button class="dropdown-item" type="button">20 min </button>
-       </div>
+     <select id="duration-select" class="form-select w-auto" aria-label="select excercise duration">
+      <option selected disabled>Select duration</option>
+      <option value="2">2 min</option>>Select duration</option>
+      <option value="5">5 min</option>>Select duration</option>
+      <option value="10">10 min</option>>Select duration</option>
+      <option value="15">15 min</option>>Select duration</option>
+      <option value="20">20 min</option>>Select duration</option>
+     </select>
     </div> 
-  </div> 
+ 
       <!--Breathing excercise circle-->
    <div class="d-flex justify-content-center custom">
     <div class="time-circle">
-      <div class="exercise-timer" id="timer-display">5:00</div>
+      <div class="exercise-timer">
+      <div class="time" id="timer-display">00:00 </div>
+      </div>
       <div class="breathing-text">
-        <p id="instructions">instructions</p>
+        <p id="instructions">Inhale</p>
       </div>
     </div>
    </div>
 <!--Breathing excercise buttons-->
    <div class="d-flex justify-content-center mb-4">
-    <button class="btn btn-link exercise-btns">
+    <button class="btn btn-link exercise-btns " id="play-btn">
       <i class="bi bi-play " ></i>
       <span>PLAY</span>
     </button>
-    <button class="btn btn-link exercise-btns">
+    <button class="btn btn-link exercise-btns" id="pause-btn">
       <i class="bi bi-pause"></i>
       <span>PAUSE</span>
     </button>
-    <button class="btn btn-link exercise-btns">
+    <button class="btn btn-link exercise-btns" id="stop-btn">
       <i class="bi bi-stop"></i>
       <span>STOP</span>
     </button>

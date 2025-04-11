@@ -183,7 +183,7 @@ width: auto;
   height: 200px;
   border-radius: 50%;
   background-color:  rgba(230, 230, 250, 0.25);
-  animation: time-circle-animation 4s infinite alternate;
+  animation: time-circle-animation 16s infinite alternate;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -194,14 +194,26 @@ width: auto;
 
 @keyframes time-circle-animation {
   0%{
-    transform: scale(1);
+    transform: scale(1.5); /*start*/
     box-shadow: 0 0 35px rgb(1, 158, 158), 0 0 60px teal, 0 0 90px teal;
   }
-  100%{
-    transform: scale(1.5);
-    box-shadow: 0 0 80px blue, 0 0 160px teal, 0 0 240px teal;
-    
+  25%{
+    transform: scale(1);/*inhale*/
+    box-shadow: 0 0 50px blue, 0 0 160px teal, 0 0 240px teal;
   }
+  50%{
+    transform: scale(1);/*hold*/
+    box-shadow: 0 0 70px rgb(213, 92, 246), 0 0 160px #ff00bb, 0 0 240px rgb(38, 0, 15);
+  }
+  75%{
+    transform: scale(1.5);/*exhale*/
+    box-shadow: 0 0 50px rgb(0, 21, 125), 0 0 160px #6a64dd, 0 0 130px rgb(64, 1, 85);
+  }
+  100%{
+    transform: scale(1);/*hold*/
+    box-shadow: 0 0 35px rgb(213, 92, 246), 0 0 160px #ff00bb, 0 0 60px rgb(38, 0, 15);
+  }
+  
   
 }
 .exercise-btns{
@@ -225,12 +237,10 @@ width: auto;
 .exercise-btns span{
   font-size: 10px;
 }
-.exercise-timer{
+.exercise-timer {
   font-size: 32px;
   font-weight:lighter;
   font-family: "Inter", serif;
-  
-
 }
 .breathing-text{
   font-size: 14px;
@@ -238,6 +248,7 @@ width: auto;
   text-align: center;
   font-weight:lighter;
 }
+
 .breathing-exercise h1{
   color: #575dfb;
   font-family: "Inter", serif;
