@@ -183,13 +183,15 @@ width: auto;
   height: 200px;
   border-radius: 50%;
   background-color:  rgba(230, 230, 250, 0.25);
-  animation: time-circle-animation 16s infinite alternate;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 50px;
-  
+  box-shadow:0 4px 90px  rgb(87, 93, 251);
+}
+.time-circle.animate{
+  animation: time-circle-animation 16s infinite alternate;
 }
 
 @keyframes time-circle-animation {
@@ -258,7 +260,7 @@ width: auto;
 .breathing-exercise p{
   color: black;
   font-family: "Inter", serif;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: lighter;
 }
 .custom{

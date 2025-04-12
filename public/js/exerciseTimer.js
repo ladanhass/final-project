@@ -5,7 +5,10 @@ const playBtn= document.getElementById('play-btn');
 const instructions = document.getElementById("instructions");
 const pauseBtn = document.getElementById("pause-btn");
 const stopBtn = document.getElementById("stop-btn");
-
+const timeCircle = document.querySelector(".time-circle");
+const audioPlayer = document.getElementById("audio-player");
+const audioBtn = document.getElementById("audio-btn");
+const audioIcon = document.getElementById("audio-icon");
 
 let timerInterval;
 let timeLeft;
@@ -19,6 +22,7 @@ function startTimer(duration){
     step = 0;
     updateTimerDisplay();
     updateInstructions();
+    timeCircle.classList.add("animate");
     timerInterval = setInterval(function(){
         if(timeLeft > 0 ){
             timeLeft--;
@@ -48,6 +52,7 @@ playBtn.addEventListener("click", function(){
     }else if (isPaused){
         isRunning = true;
         isPaused = false;
+        timeCircle.classList.add("animate");
         resumeTimer();
     }
 });
@@ -84,9 +89,25 @@ function resetTimer(){
     step = 0;
     updateInstructions();
     timerDisplay.textContent = "00:00";
+    instructions.textContent = "Begin exercise"
+    timeCircle.classList.remove("animate");
 }
 stopBtn.addEventListener("click", function(){
     resetTimer();
+});
+
+
+audioBtn.addEventListener("click", function(){
+    if (audioPlayer.paused){
+        audioPlayer.play();
+        audioIcon.classList.remove("bi-volume-mute-fill");
+        audioIcon.classList.add("bi-volume-up-fill");
+    }else{
+        audioPlayer.pause();
+        audioIcon.classList.remove("bi-volume-up-fill");
+        audioIcon.classList.add("bi-volume-mute-fill");
+
+    }
 });
 
 });

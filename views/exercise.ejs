@@ -34,7 +34,13 @@
       <option value="15">15 min</option>>Select duration</option>
       <option value="20">20 min</option>>Select duration</option>
      </select>
+     <button id="audio-btn" class="btn btn-link">
+      <i id="audio-icon" class="bi bi-volume-mute-fill"></i>
+     </button>
     </div> 
+    <audio id="audio-player" preload="auto">
+      <source src="images/ocean-sounds.mp3" type="audio/mpeg" aria-label="Ocean sounds for relaxation">
+    </audio>
  
       <!--Breathing excercise circle-->
    <div class="d-flex justify-content-center custom">
@@ -43,7 +49,7 @@
       <div class="time" id="timer-display">00:00 </div>
       </div>
       <div class="breathing-text">
-        <p id="instructions">Inhale</p>
+        <p id="instructions">Begin exercise</p>
       </div>
     </div>
    </div>
