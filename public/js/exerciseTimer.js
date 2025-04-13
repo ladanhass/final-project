@@ -77,6 +77,7 @@ pauseBtn.addEventListener("click", function(){
         clearInterval(timerInterval);
         isRunning = false;
         isPaused = true;
+        timeCircle.classList.remove("animate");
     }
 });
 function updateInstructions(){

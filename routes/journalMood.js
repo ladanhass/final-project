@@ -11,38 +11,39 @@ const redirectLogin = (req, res, next) => {
       next();
     }
   };
+ 
 //gets and displays journal page with entries
-router.get("/", redirectLogin, function (req, res,next){
+router.get("/", redirectLogin, function (req, res, next){
     let sqlqueryMoods = "SELECT * FROM moods WHERE user_id = ?";
     db.query(sqlqueryMoods, [req.session.userId], (err, moodResults) => {
-        if(err){
-            return next(err);
-        }
-        let sqlqueryJournal = "SELECT * FROM journal WHERE user_id = ?";
-        db.query(sqlqueryJournal, [req.session.userId], (err, journalResults) => {
-            if(err){
-                return next(err);
-            }
-           
-            const decryptedEntries = journalResults.length > 0 ? journalResults.map(entry => {
-                console.log("encrpted", entry.entry);
+        if(err)  return next(err);
+    
+        let sqlqueryJournal = `SELECT day, entry FROM journal j  WHERE user_id = ? AND id = (
+            SELECT MAX(id) FROM journal WHERE user_id = j.user_id
+            AND day = j.day )
+            ORDER BY day ASC `;
 
+        db.query(sqlqueryJournal, [req.session.userId], (err, journalResults) => {
+            if(err)return next(err);
+            const decryptedEntries = journalResults.map(entry => {
+                console.log("encrpted", entry.entry);
                 const decryptedText= decrypt(entry.entry);
                 console.log("decrypted text", decryptedText);
                 return{
                     ...entry,
-                    entry:decryptedText
+                    entry:decryptedText || ''
                 };
-            }) : [];
-            console.log("decentries: ", decryptedEntries);
-            //console.log("render");
-           
-
-        res.render("journal", {
+            });
+            const journalMap = {};
+            decryptedEntries.forEach(entry => {
+                journalMap[entry.day]= entry.entry;
+                
+            });
+            console.log("decrypted entries ", journalMap);
+        return res.render("journal", {
             moods: moodResults,
-             journal: decryptedEntries,
+             journal: journalMap ,
              userId: req.session.userId,
-             alert:[]
             });
             });
         });
@@ -107,7 +108,6 @@ let sqlquery = `SELECT day, mood FROM moods m  WHERE user_id = ? AND id = (
         if (!errors.isEmpty()) {
           return res.render("journal", { alert: errors.array(), userId: req.session.userId });
         }
-        
     const { day, entry} = req.body;
     const sanitizedEntry= entry.trim();
     const encryptedEntry = encrypt(sanitizedEntry);

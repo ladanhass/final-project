@@ -124,7 +124,7 @@ router.post(
         //checks if password is correct compares redirect to pages
         if (isMatch) {
           req.session.userId = result[0].id;
-          return res.render("journal");
+          return res.redirect("/journal");
         } else {
           return res.render("login", {
             alert: [{ msg: "Login failed. Incorrect Password" }],
