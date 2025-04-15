@@ -14,6 +14,12 @@ input.form-control {
   color: #575dfb;
   font-family: "Inter", serif;
 }
+.reg-title{
+  color: #575dfb;
+  font-family: "Inter", serif;
+  font-size: 25px;
+
+}
 /*responsive button*/
 .btn-auth {
   background-color: #575dfb;
@@ -28,6 +34,11 @@ input.form-control {
   object-fit: cover;
   border-radius: 20px;
 }
+.row.display-full{
+  min-height: 100vh;
+  align-items: stretch;
+
+}
 
 /* register and login links */
 .auth-link {
@@ -39,6 +50,10 @@ input.form-control {
 }
 /*logo style*/
 .logo-style {
+  width: 35%;
+  height: auto;
+}
+.logo-login {
   width: 50%;
   height: auto;
 }

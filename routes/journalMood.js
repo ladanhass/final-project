@@ -44,6 +44,9 @@ router.get("/", redirectLogin, function (req, res, next){
             moods: moodResults,
              journal: journalMap ,
              userId: req.session.userId,
+             alert: []
+            
+            
             });
             });
         });
@@ -105,10 +108,12 @@ let sqlquery = `SELECT day, mood FROM moods m  WHERE user_id = ? AND id = (
     ],
     function(req, res,next){
         const errors = validationResult(req);
+        console.log(errors.array());
         if (!errors.isEmpty()) {
           return res.render("journal", { alert: errors.array(), userId: req.session.userId });
         }
     const { day, entry} = req.body;
+    console.log("sanitised entry: ", entry);
     const sanitizedEntry= entry.trim();
     const encryptedEntry = encrypt(sanitizedEntry);
     let sqlquery= "INSERT INTO journal(user_id, day, entry) VALUES (?,?,?) ";
@@ -119,4 +124,15 @@ let sqlquery = `SELECT day, mood FROM moods m  WHERE user_id = ? AND id = (
         res.redirect("/journal");
     });
   });
+  router.post("/delete-entry", redirectLogin, function(req, res, next){
+    const {day} = req.body;
+    let  sqlquery = "DELETE FROM journal WHERE user_id = ? AND day= ? ";
+    db.query(sqlquery, [req.session.userId, day], (err, results) =>{
+        if(err){
+            return next(err);
+        }else{
+            res.redirect("/journal");
+        }
+    });
+});
 module.exports = router;
