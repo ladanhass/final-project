@@ -34,10 +34,8 @@ input.form-control {
   object-fit: cover;
   border-radius: 20px;
 }
-.row.display-full{
-  min-height: 100vh;
-  align-items: stretch;
-
+.wrapper{
+  height: 100%;
 }
 
 /* register and login links */
@@ -191,6 +189,16 @@ width: auto;
   border: 3px solid red !important;
   background-color: transparent !important;
   color: red !important;
+}
+.alert-settings{
+  background-color: #b3c5f5;
+  color: #575dfb;
+  border-color: #575dfb;
+  align-items: center;
+  max-width: 600px;
+  padding: 15px 20px;
+  margin: 20px auto;
+
 }
 /*--------------Breathing exercise timer--------------*/
 .time-circle{

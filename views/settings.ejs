@@ -16,24 +16,47 @@
   </head>
   <body>
    <%-include('navbar') %>
+     <!--Display alert-->
+     <% if (typeof alert != 'undefined' && alert.length > 0){ %>
+      <% alert.forEach(function(error){ %>
+          <div class=" alert alert-settings alert-dismissible fade show" role="alert">
+              <%= error.msg %>
+              <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="close"
+              >
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+     <% }) %>
+ <% } %>
        <!--settings-->
    <div class="container container-settings mt-5">
     <h1 class="mb-4">Settings</h1>
+    <form action="/settings/change-password" method="POST">
     <h2 class="mb-3">Change Password</h2>
     <div class="mb-3">
       <label for="currentPassword" class="form-label">Current Password</label>
       <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
     </div>
     <div class="mb-3">
-      <label for="NewPassword" class="form-label">New Password</label>
-      <input type="password" class="form-control" id="NewPassword" name="NewPassword" required>
+      <label for="newPassword" class="form-label">New Password</label>
+      <input type="password" class="form-control" id="newPassword" name="newPassword" required>
     </div>
     <div class="mb-3">
-      <label for="ConfirmPassword" class="form-label">Confirm Password</label>
-      <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" required>
+      <label for="confirmPassword" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
     </div>
     <button type="submit" class="btn btn-change btn-primary">Change Password</button>
-   </div>
+  </form>
+  </div>
+</div>
+  
+
+  
+  
 
    <!--logout btn-->
    <div class="container mt-3">
