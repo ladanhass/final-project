@@ -54,7 +54,10 @@ async function(req, res, next){
   }
   const{currentPassword, newPassword, confirmPassword} = req.body;
   const userId = req.session.userId;
+  
+  
   if(newPassword !== confirmPassword){
+    console.log(errors.array());
     return res.render("settings",{alert: [{msg: "Password do not match enter correct password"}]});
 
   }

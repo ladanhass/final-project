@@ -44,6 +44,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.render("register", { alert: errors.array() });
     }
+   
     const plainPassword = req.body.plainPassword;
     const firstName = req.body.first;
     const lastName = req.body.last;
