@@ -20,15 +20,13 @@
   <body>
     <%-include('navbar') %>
         <!---weekly Mood graph-->
-        <div class="container mt-5">
-            <div class="row mb-3">
-              <div class="col-12 text-center">
-                <h2><strong>Weekly Mood Graph</strong></h2>
-                <div>
-                    <canvas id="moodGraph"></canvas>
-                  </div>
-             </div>
-             </div>
+
+   <div class="container chart-container mt-5">
+    <h1 class="mb-4">Weekly Mood Graph</h1>
+    <canvas id="moodGraph"></canvas>
+      </div>
+             
+
              <script src="/js/graph.js"></script>
       <!-- Bootstrap JavaScript Libraries -->
       <script

@@ -88,9 +88,10 @@ width: auto;
   
 }
 .offcanvas{
-  background-color: #787cf5;
+  background-color: rgb(120, 124, 245);
   color: #ffffff;
   border-radius: 15px 0 0 15px   !important;
+  
 
 }
 .offcanvas  .nav-link{
@@ -99,6 +100,13 @@ width: auto;
 }
 .offcanvas .nav-link:hover{
   color:  #49CDDC !important;
+}
+.offcanvas-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  
 }
 .custom-toggler{
   border: none;
@@ -150,9 +158,13 @@ width: auto;
   border-radius: 20px;
 }
 
-#moodGraph{
-  background-color: white;
-  border-radius: 20px;
+.chart-container{
+  background-color: #b0dbf2;
+  border-radius: 25px;
+  padding: 40px;
+  max-width: 750px;
+  box-shadow: 0 20px 40px rgb(2, 98, 81,1);
+
 }
 /*-------------------------------Settings----------------------------------*/
 .container-settings{
@@ -160,7 +172,7 @@ width: auto;
   border-radius: 25px;
   padding: 40px;
   max-width: 750px;
-  box-shadow: 0 20px 40px rgb(86, 91, 251 ,1);
+  box-shadow: 0 20px 60px rgb(27, 112, 162);
 
 }
 .container-settings h1{
