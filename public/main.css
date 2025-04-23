@@ -166,6 +166,12 @@ width: auto;
   box-shadow: 0 20px 40px rgb(2, 98, 81,1);
 
 }
+.container-journal h2{
+  font-size: 30px;
+}
+.container-journal p{
+  font-size: 20px;
+}
 /*-------------------------------Settings----------------------------------*/
 .container-settings{
   background-color: #b0dbf2;
@@ -184,7 +190,7 @@ width: auto;
 .container-settings h2{
   color: #575dfb;
   font-family: "Inter", serif;
-  font-size: 20px;
+  font-size: 30px;
 }
 .btn-delete{
   width: 100%;
@@ -308,7 +314,7 @@ width: auto;
 .breathing-exercise p{
   color: black;
   font-family: "Inter", serif;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: lighter;
 }
 .custom{

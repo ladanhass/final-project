@@ -18,7 +18,7 @@
   <body>
     <%-include('navbar') %>
     <!---weekly journal and Mood -->
-    <div class="container mt-5">
+    <div class="container  container-journal mt-5">
       <div class="row mb-3">
         <div class="col-12 text-center">
           <h2><strong>Weekly Journal And Mood Tracking</strong></h2>
@@ -94,7 +94,7 @@
                <!---deletes journal entry-->
                <form action="/journal/delete-entry" method="POST">
                 <input type="hidden" name="day" value="<%= day%>">
-                <button type = "submit"  class="btn btn-primary mt-2" >DELETE</button>
+                <button type = "submit"  class="btn btn-danger mt-2" >DELETE</button>
               </form>
             </div>
           </div>
