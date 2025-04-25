@@ -247,7 +247,9 @@ width: auto;
 .time-circle.animate{
   animation: time-circle-animation 16s infinite alternate;
 }
-
+.time-circle.paused{
+  animation-play-state: paused;
+}
 @keyframes time-circle-animation {
   0%{
     transform: scale(1.5); /*start*/
@@ -262,15 +264,13 @@ width: auto;
     box-shadow: 0 0 70px rgb(213, 92, 246), 0 0 160px #ff00bb, 0 0 240px rgb(38, 0, 15);
   }
   75%{
-    transform: scale(1.5);/*exhale*/
+    transform: scale(1);/*exhale*/
     box-shadow: 0 0 50px rgb(0, 21, 125), 0 0 160px #6a64dd, 0 0 130px rgb(64, 1, 85);
   }
   100%{
     transform: scale(1);/*hold*/
     box-shadow: 0 0 35px rgb(213, 92, 246), 0 0 160px #ff00bb, 0 0 60px rgb(38, 0, 15);
   }
-  
-  
 }
 .exercise-btns{
 
@@ -319,4 +319,8 @@ width: auto;
 }
 .custom{
   margin-top:60px;
+}
+.error{
+  display: none;
+  color: #c01033;
 }

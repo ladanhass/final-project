@@ -9,7 +9,7 @@ require("dotenv").config();
 
 //port and initialise
 const app = express();
-const port = 8001;
+const port = 8003;
 
 //Used to get iv and key
 require("./utils/encrypt");
@@ -17,6 +17,7 @@ require("./utils/encrypt");
 //  const iv = crypto.randomBytes(16).toString('hex');
 // console.log("generate key:" , key);
 // console.log("generate iv:", iv);
+
 
 
 app.set("view engine", "ejs");
@@ -50,9 +51,8 @@ db.connect((err) => {
 });
 global.db = db;
 
-//define routes
 
-//routes for register and login
+//define routes
 const usersRoutes = require("./routes/users");
 app.use("/", usersRoutes);
 const journalMood = require("./routes/journalMood");
@@ -61,6 +61,11 @@ const settingsRoutes = require("./routes/settingsRoutes");
 app.use("/settings", settingsRoutes);
 const exerciseRoutes = require("./routes/exercise");
 app.use("/exercise", exerciseRoutes);
+
+app.use((err, req, res, next) =>{
+  console.error(err);
+  res.status(500).send('something broke')
+})
 
 
 //starts server

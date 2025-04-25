@@ -1,89 +1,80 @@
 const express = require("express");
 const router = express.Router();
-// const {redirectLogin} = require('./users');
-const{ encrypt, decrypt} = require('../utils/encrypt');
+const{ encrypt, decrypt} = require('../utils/encrypt'); //Imports encryption and decryption
 const { check, validationResult } = require("express-validator");
-//middleware function 
+
+//middleware function to check if user is logged in 
 const redirectLogin = (req, res, next) => {
     if (!req.session.userId) {
-      res.render("./login");
+      res.redirect("/login"); //If not logged in shows login page 
     } else {
       next();
     }
   };
- 
-//gets and displays journal page with entries
+
+//Gets and displays journal page 
 router.get("/", redirectLogin, function (req, res, next){
-    let sqlqueryMoods = "SELECT * FROM moods WHERE user_id = ?";
-    db.query(sqlqueryMoods, [req.session.userId], (err, moodResults) => {
-        if(err)  return next(err);
-    
+        //Query to get the latest journal entry for each day 
         let sqlqueryJournal = `SELECT day, entry FROM journal j  WHERE user_id = ? AND id = (
             SELECT MAX(id) FROM journal WHERE user_id = j.user_id
             AND day = j.day )
             ORDER BY day ASC `;
 
         db.query(sqlqueryJournal, [req.session.userId], (err, journalResults) => {
-            if(err)return next(err);
-            const decryptedEntries = journalResults.map(entry => {
-                console.log("encrpted", entry.entry);
-                const decryptedText= decrypt(entry.entry);
-                console.log("decrypted text", decryptedText);
-                return{
-                    ...entry,
-                    entry:decryptedText || ''
-                };
-            });
+            if(err)return next(err);// Handles if query fails
+             //console.log("encrypted: ", entry.entry);
+            // console.log("decrypted text: ", decryptedText);
+             // console.log("decrypted entries: ", journalMap);
+             //Maps to hold decrypted journal entries by day
             const journalMap = {};
-            decryptedEntries.forEach(entry => {
-                journalMap[entry.day]= entry.entry;
-                
+            //loop through each entries and decrypt text
+            journalResults.forEach(entry => {
+                const decryptedText= decrypt(entry.entry);//Decrypts entry
+                journalMap[entry.day]= decryptedText;// Stores decrypted entries by day
             });
-            console.log("decrypted entries ", journalMap);
+           //Renders journal page moods and decrypted journal entry 
         return res.render("journal", {
-            moods: moodResults,
-             journal: journalMap ,
-             userId: req.session.userId,
-             alert: []
-            
-            
+             journal: journalMap ,//Pass decrypted data
             });
             });
         });
-    });
 
 
-//saves mood entries 
+//Route to saves mood entry 
 router.post("/save-mood", redirectLogin, function(req, res, next){
-    const{day, mood} = req.body;
+    const{day, mood} = req.body; // Gets day and mood from form
     let  sqlquery = "INSERT INTO moods (user_id, day, mood) VALUES (?,?,?) ";
-    db.query(sqlquery, [req.session.userId, day, mood ], (err, results) =>{
+    db.query(sqlquery, [req.session.userId, day, mood ], (err) =>{
         if(err){
             return next(err);
         }else{
-            res.redirect("/journal");
+            return res.redirect("/journal");// Redirects to journal page after saving 
         }
     });
 });
-//route to delete mood entry
+
+//Route to delete mood entry
 router.post("/delete-mood", redirectLogin, function(req, res, next){
-    const{day, mood} = req.body;
+    const{day} = req.body; 
+     //SQL to delete mood for specific user and day
     let  sqlquery = "DELETE FROM moods WHERE user_id = ? AND day= ? ";
-    db.query(sqlquery, [req.session.userId, day], (err, results) =>{
+    db.query(sqlquery, [req.session.userId, day], (err) =>{
         if(err){
             return next(err);
         }else{
-            res.redirect("/journal");
+            return res.redirect("/journal");
         }
     });
 });
-//renders graph page
-router.get("/graph", redirectLogin, function(req, res, next){
+
+//Renders graph page
+router.get("/graph", redirectLogin, function(req, res){
     res.render("graph");
 });
 
-//api route to fetch latest moods for each day
+//API route to fetch latest moods for each day
 router.get("/api/moods", (req, res, next) => {
+ //Query to get the latest mood for each day 
 let sqlquery = `SELECT day, mood FROM moods m  WHERE user_id = ? AND id = (
     SELECT MAX(id) FROM moods WHERE user_id = m.user_id
     AND day = m.day )
@@ -92,46 +83,46 @@ let sqlquery = `SELECT day, mood FROM moods m  WHERE user_id = ? AND id = (
         if(err){
             return next(err);
         }else{
-            res.json(results);
+           return  res.json(results);// Returns mood data as Json
         }
     });
   });
 
-
+//Route to save journal 
   router.post(
     "/save-entry", 
     redirectLogin,[
-        check("entry")
-        .trim()
-        .escape()
-        .notEmpty().withMessage("please add entry to save"),
+        check("entry")// Validation for entry input
+        .trim()// Removes leading and trailing spaces 
+        .escape()// Escapes any html special charaters
     ],
     function(req, res,next){
-        const errors = validationResult(req);
-        console.log(errors.array());
+        const errors = validationResult(req); //Check for validation errors
         if (!errors.isEmpty()) {
-          return res.render("journal", { alert: errors.array(), userId: req.session.userId });
+          return res.render("journal", { alert: errors.array()});
         }
-    const { day, entry} = req.body;
-    console.log("sanitised entry: ", entry);
-    const sanitizedEntry= entry.trim();
-    const encryptedEntry = encrypt(sanitizedEntry);
+    const { day, entry} = req.body; 
+    const encryptedEntry = encrypt(entry);//Encrypt journal entry
+    //SQL to save encrypted entry to database 
     let sqlquery= "INSERT INTO journal(user_id, day, entry) VALUES (?,?,?) ";
-    db.query(sqlquery, [req.session.userId , day, encryptedEntry], (err, results) =>{
+    db.query(sqlquery, [req.session.userId , day, encryptedEntry], (err) =>{
         if(err){
             return next(err);
         }
-        res.redirect("/journal");
+        return res.redirect("/journal");
     });
   });
+
+  //Route to delete journal entry 
   router.post("/delete-entry", redirectLogin, function(req, res, next){
     const {day} = req.body;
+     //SQL to delete journal entry for specific user and day
     let  sqlquery = "DELETE FROM journal WHERE user_id = ? AND day= ? ";
-    db.query(sqlquery, [req.session.userId, day], (err, results) =>{
+    db.query(sqlquery, [req.session.userId, day], (err) =>{
         if(err){
             return next(err);
         }else{
-            res.redirect("/journal");
+            return res.redirect("/journal");
         }
     });
 });

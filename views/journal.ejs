@@ -14,10 +14,11 @@
     <!-- css stylesheet-->
     <link rel="stylesheet" href="/main.css" />
   </head>
- <!-- Navbar -->
+ <!-- Includes Navbar -->
   <body>
     <%-include('navbar') %>
-    <!---weekly journal and Mood -->
+    <!---Weekly journal and Mood tracking-->
+    <!--Page header-->
     <div class="container  container-journal mt-5">
       <div class="row mb-3">
         <div class="col-12 text-center">
@@ -27,12 +28,12 @@
       </div>
       <div class="row mb-4">
         <div class="col-12 text-center">
-              <!---displays full currect date -->
+              <!---Displays todays full date -->
           <p><strong> Todays date: </strong>
             <%= new Date().toLocaleDateString('en-GB', {weekday: 'long', day: 'numeric', month: 'long', year:'numeric'})%></p>
         </div>
       </div>
-      <!--Display alert-->
+      <!--Display alert from validation-->
       <% if (typeof alert != 'undefined' && alert.length > 0){ %>
         <% alert.forEach(function(error){ %>
             <div class=" alert alert-warning alert-dismissible fade show" role="alert">
@@ -51,23 +52,26 @@
        <!---weekly journal and mood drop-down-->
        <div class="accordion" id="journalAccordion">
           <!---loops over each day of the week-->
-        
+        <!--Defines days of the week-->
         <% const daysOfWeek =['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']; %>
+        <!--Loops through each days of the week-->
         <% daysOfWeek.forEach(day => { %>
         <div class="accordion-item" id="<%= day.toLowerCase() %>">
           <h2 class="accordion-header">
-            <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapse<%= day %>">
+            <button class="accordion-button" data-bs-toggle="collapse"  data-bs-target="#collapse<%= day %>">
          <%= day %>  
             </button>
           </h2>
           
-         <!--mood drop-down-->
+         <!--Accordian content for each day-->
           <div id="collapse<%= day %>" class="accordion-collapse collapse" data-bs-parent="#journalAccordion">
             <div class="accordion-body">
+              <!--Mood form submission-->
               <form action="/journal/save-mood" method="POST">
-               <!---stores day of week when submitting form -->
+               <!---hidden input stores each day -->
                 <input type="hidden" name="day" value="<%= day%>">
               <label for="<%= day.toLowerCase() %>Mood" class="form-label">Select your mood for today:</label>
+              <!--Mood selection dropdown-->
               <select class="form-select mood-select"  name="mood" id="<%= day.toLowerCase() %>Mood" required data-day=" <%= day%>" >
                 <option value="" disabled selected>Select your mood</option>
                 <option value="5">😀 Happy</option>
@@ -88,6 +92,7 @@
               <form action="/journal/save-entry" method="POST">
               <input type="hidden" name="day" value="<%= day%>" >
               <label for="<%= day.toLowerCase() %>Entry" class="form-label">Take a moment to reflect on your day.</label>
+              <!--adds saved user input in textarea leaves it blank if no input-->
               <textarea class="form-control journal-entry" name="entry" rows="4"  id="<%= day.toLowerCase() %>Entry" data-day="<%= day%>" ><%- journal[day] || '' %></textarea>
               <button type="submit" class="btn btn-primary save-btn mt-2" data-day="<%= day %>">Save</button>
             </form>
