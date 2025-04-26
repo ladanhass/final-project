@@ -3,10 +3,10 @@ var express = require("express");
 var ejs = require("ejs");
 var session = require("express-session");
 var mysql = require("mysql2");
-const crypto = require('crypto');
+const crypto = require("crypto");
 require("dotenv").config();
 
-require('../utils/middleWare');
+require("../utils/middleWare");
 //port and initialise
 const app = express();
 const port = 8006;
@@ -17,8 +17,6 @@ require("./utils/encrypt");
 //  const iv = crypto.randomBytes(16).toString('hex');
 // console.log("generate key:" , key);
 // console.log("generate iv:", iv);
-
-
 
 app.set("view engine", "ejs");
 app.use(express.json());
@@ -51,7 +49,6 @@ db.connect((err) => {
 });
 global.db = db;
 
-
 //define routes
 const usersRoutes = require("./routes/users");
 app.use("/", usersRoutes);
@@ -62,11 +59,10 @@ app.use("/settings", settingsRoutes);
 const exerciseRoutes = require("./routes/exercise");
 app.use("/exercise", exerciseRoutes);
 
-app.use((err, req, res, next) =>{
+app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).send('something broke')
-})
-
+  res.status(500).send("something broke");
+});
 
 //starts server
 app.listen(port, () => console.log(`Node app listening on port ${port}!`));

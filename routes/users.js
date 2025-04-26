@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const{redirectLogin} = require('../utils/middleWare');
+const { redirectLogin } = require("../utils/middleWare");
 const { check, validationResult } = require("express-validator");
 
 // render home page
@@ -13,7 +13,6 @@ router.get("/", (req, res, next) => {
 router.get("/login", (req, res, next) => {
   res.render("login.ejs", { alert: [] });
 });
-
 
 // handles registration form input validation
 router.post(
@@ -26,10 +25,22 @@ router.post(
       .escape()
       .withMessage("Provide a valid email"),
     check("plainPassword")
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/)
-    .withMessage("Password must contain atleat one uppercase and lowercase and one special charater and be 8-15 characters"),
-    check("first").notEmpty().trim().escape().withMessage("First name cannot be empty"),
-    check("last").notEmpty().trim().escape().withMessage("last name cannot be empty"),
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/
+      )
+      .withMessage(
+        "Password must contain atleat one uppercase and lowercase and one special charater and be 8-15 characters"
+      ),
+    check("first")
+      .notEmpty()
+      .trim()
+      .escape()
+      .withMessage("First name cannot be empty"),
+    check("last")
+      .notEmpty()
+      .trim()
+      .escape()
+      .withMessage("last name cannot be empty"),
   ],
   //checks validation
   function (req, res) {
@@ -37,7 +48,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.render("register", { alert: errors.array() });
     }
-   
+
     const plainPassword = req.body.plainPassword;
     const firstName = req.body.first;
     const lastName = req.body.last;
@@ -95,7 +106,7 @@ router.post(
     }
     // gets passwords and email form request
     const plainPassword = req.body.plainPassword;
-    const email = req.body.email; 
+    const email = req.body.email;
 
     //finds the users email
     let sqlquery = "SELECT * FROM users WHERE email = ?";

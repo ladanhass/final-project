@@ -1,84 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Breathing excersise</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <!--font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
-    <!-- css stylesheet-->
-    <link rel="stylesheet" href="/main.css" />
-    <!-- exerciseTimer.js stylesheet-->
-    <script src="/js/exerciseTimer.js"></script>
-  </head>
-  <body>
-   <%-include('navbar') %>
+
+<head>
+  <title>Breathing excersise</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <!--font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet" />
+  <!-- css stylesheet-->
+  <link rel="stylesheet" href="/main.css" />
+  <!-- exerciseTimer.js script-->
+  <script src="/js/exerciseTimer.js"></script>
+</head>
+
+<body>
+  <%-include('navbar') %>
     <!--Breathing excercise title and container-->
-   <div class="container mt-5 text-center breathing-exercise">
-    <h1 class="mb-4 ">Breathing Exercise</h1>
-    <p>Practice the box breathing method to calm your mind</p>
-    <div id="error-msg" class="error" ></div>
-    <!--Breathing excercise duration options-->
-    <div class="mb-4 d-flex justify-content-center align-items-center">
-     <p class="mb-0 me-2">Select duration:</p>
-     <select id="duration-select" class="form-select w-auto" aria-label="select excercise duration" required>
-      <option value="" selected disabled>Select duration</option>
-      <option value="1">1 min</option>
-      <option value="2">2 min</option>
-      <option value="5">5 min</option>
-      <option value="10">10 min</option>
-      <option value="15">15 min</option>
-      <option value="20">20 min</option>
-      <option value="25">25 min</option>
-     </select>
-     <button id="audio-btn" class="btn btn-link" >
-      <i id="audio-icon" class="bi bi-volume-mute-fill"></i>
-     </button>
-    </div> 
-    <audio id="audio-player" loop preload="auto">
-      <source src="images/ocean-sounds.mp3" type="audio/mpeg" aria-label="Ocean sounds for relaxation">
-    </audio>
- 
+    <div class="container mt-5 text-center breathing-exercise">
+      <h1 class="mb-4 ">Breathing Exercise</h1>
+      <p> Calm Your Mind With Box Breathing Method</p>
+      <div id="error-msg" class="error"></div>
+      <!--Breathing excercise duration options-->
+      <div class="mb-4 d-flex justify-content-center align-items-center">
+        <p class="mb-0 me-2">Select duration:</p>
+        <select id="duration-select" class="form-select w-auto" aria-label="select excercise duration" required>
+          <option value="" selected disabled>Select duration</option>
+          <option value="1">1 min</option>
+          <option value="2">2 min</option>
+          <option value="5">5 min</option>
+          <option value="10">10 min</option>
+          <option value="15">15 min</option>
+          <option value="20">20 min</option>
+          <option value="25">25 min</option>
+        </select>
+        <button id="audio-btn" class="btn btn-link">
+          <i id="audio-icon" class="bi bi-volume-mute-fill"></i>
+        </button>
+      </div>
+      <audio id="audio-player" loop preload="auto">
+        <source src="images/ocean-sounds.mp3" type="audio/mpeg" aria-label="Ocean sounds for relaxation">
+      </audio>
+
       <!--Breathing excercise circle-->
-   <div class="d-flex justify-content-center custom">
-    <div class="time-circle">
-      <div class="exercise-timer">
-      <div class="time" id="timer-display">00:00 </div>
+      <div class="d-flex justify-content-center custom">
+        <div class="time-circle">
+          <div class="exercise-timer">
+            <div class="time" id="timer-display">00:00 </div>
+          </div>
+          <div class="breathing-text">
+            <p id="instructions">Begin Exercise</p>
+          </div>
+        </div>
       </div>
-      <div class="breathing-text">
-        <p id="instructions">Begin exercise</p>
-      </div>
-    </div>
-   </div>
-<!--Breathing excercise buttons-->
-   <div class="d-flex justify-content-center mb-4">
-    <button class="btn btn-link exercise-btns " id="play-btn">
-      <i class="bi bi-play " ></i>
-      <span>PLAY</span>
-    </button>
-    <button class="btn btn-link exercise-btns" id="pause-btn">
-      <i class="bi bi-pause"></i>
-      <span>PAUSE</span>
-    </button>
-    <button class="btn btn-link exercise-btns" id="stop-btn">
-      <i class="bi bi-stop"></i>
-      <span>STOP</span>
-    </button>
-   
-  
+      <!--Breathing excercise buttons-->
+      <div class="d-flex justify-content-center mb-4">
+        <button class="btn btn-link exercise-btns " id="play-btn">
+          <i class="bi bi-play "></i>
+          <span>PLAY</span>
+        </button>
+        <button class="btn btn-link exercise-btns" id="pause-btn">
+          <i class="bi bi-pause"></i>
+          <span>PAUSE</span>
+        </button>
+        <button class="btn btn-link exercise-btns" id="stop-btn">
+          <i class="bi bi-stop"></i>
+          <span>STOP</span>
+        </button>
 
-
-
-
-
-    <!-- Bootstrap JavaScript Libraries -->
-    <!-- <script
+        <!-- Bootstrap JavaScript Libraries -->
+        <!-- <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
       crossorigin="anonymous"
@@ -88,8 +87,9 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-    
-    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
+          </script>
 </body>
+
 </html>
