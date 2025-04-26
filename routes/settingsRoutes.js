@@ -1,17 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const{redirectLogin} = require('../utils/middleWare');
 const { check, validationResult} = require("express-validator");
 const saltRounds = 10;
 
 
-const redirectLogin = (req, res, next) => {
-    if (!req.session.userId) {
-      res.render("./login");
-    } else {
-      next();
-    }
-  };
+
 
 router.get("/", redirectLogin, function(req, res, next){
     res.render("settings", {alert: []});

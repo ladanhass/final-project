@@ -1,16 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const{ encrypt, decrypt} = require('../utils/encrypt'); //Imports encryption and decryption
+const{redirectLogin} = require('../utils/middleWare');
 const { check, validationResult } = require("express-validator");
 
-//middleware function to check if user is logged in 
-const redirectLogin = (req, res, next) => {
-    if (!req.session.userId) {
-      res.redirect("/login"); //If not logged in shows login page 
-    } else {
-      next();
-    }
-  };
 
 //Gets and displays journal page 
 router.get("/", redirectLogin, function (req, res, next){

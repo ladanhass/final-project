@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const{redirectLogin} = require('../utils/middleWare');
 const { check, validationResult } = require("express-validator");
 
 // render home page
@@ -13,13 +14,7 @@ router.get("/login", (req, res, next) => {
   res.render("login.ejs", { alert: [] });
 });
 
-const redirectLogin = (req, res, next) => {
-  if (!req.session.userId) {
-    res.render("./login");
-  } else {
-    next();
-  }
-};
+
 // handles registration form input validation
 router.post(
   "/registered",
@@ -31,10 +26,8 @@ router.post(
       .escape()
       .withMessage("Provide a valid email"),
     check("plainPassword")
-      .isLength({ min: 8 })
-      .withMessage("Password must be at least 8 characters long")
-      .isAlphanumeric()
-      .withMessage("Password must only contain letters and numbers"),
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/)
+    .withMessage("Password must contain atleat one uppercase and lowercase and one special charater and be 8-15 characters"),
     check("first").notEmpty().trim().escape().withMessage("First name cannot be empty"),
     check("last").notEmpty().trim().escape().withMessage("last name cannot be empty"),
   ],

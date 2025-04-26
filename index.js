@@ -6,10 +6,10 @@ var mysql = require("mysql2");
 const crypto = require('crypto');
 require("dotenv").config();
 
-
+require('../utils/middleWare');
 //port and initialise
 const app = express();
-const port = 8003;
+const port = 8006;
 
 //Used to get iv and key
 require("./utils/encrypt");

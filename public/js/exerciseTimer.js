@@ -9,14 +9,13 @@ const timeCircle = document.querySelector(".time-circle");
 const audioPlayer = document.getElementById("audio-player");
 const audioBtn = document.getElementById("audio-btn");
 const audioIcon = document.getElementById("audio-icon");
-
+const errorMsg = document.getElementById("error-msg");
 let timerInterval;
 let timeLeft;
 let isRunning = false;
 let isPaused = false;
 let step = 0;
 const steps = ["Inhale","Hold", "Exhale" , "Hold"];
-
 function startTimer(duration){
     timeLeft = duration * 60;
     step = 0;
@@ -45,7 +44,12 @@ function updateTimerDisplay(){
 }
 
 playBtn.addEventListener("click", function(){
-    if(!isRunning && !isPaused && durationSelect.value){
+    if(!durationSelect.value){
+        errorMsg.textContent = "Please select duration";
+        errorMsg.style.display ="block"
+    }else{
+        errorMsg.style.display = 'none';
+    if(!isRunning && !isPaused){
         startTimer(parseInt(durationSelect.value));
         isRunning = true;
         isPaused = false;
@@ -55,6 +59,7 @@ playBtn.addEventListener("click", function(){
         timeCircle.classList.add("animate");
         resumeTimer();
     }
+}
 });
 function resumeTimer(){
     timerInterval = setInterval(function(){
@@ -110,5 +115,4 @@ audioBtn.addEventListener("click", function(){
 
     }
 });
-
 });

@@ -1,13 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
-const redirectLogin = (req, res, next) => {
-    if (!req.session.userId) {
-      res.render("./login");
-    } else {
-      next();
-    }
-  };
+const{redirectLogin} = require('../utils/middleWare');
 
 router.get("/", redirectLogin, function(req, res, next){
     res.render("exercise");
