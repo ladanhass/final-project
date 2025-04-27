@@ -1,3 +1,4 @@
+//Imports necessary modules
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -5,16 +6,16 @@ const saltRounds = 10;
 const { redirectLogin } = require("../utils/middleWare");
 const { check, validationResult } = require("express-validator");
 
-// render home page
+// Render register  page
 router.get("/", (req, res, next) => {
   res.render("register.ejs", { alert: [] });
 });
-//renders login page
+//Renders login page
 router.get("/login", (req, res, next) => {
   res.render("login.ejs", { alert: [] });
 });
 
-// handles registration form input validation
+// Handles registration form submission input validation
 router.post(
   "/registered",
   [
@@ -45,6 +46,7 @@ router.post(
   //checks validation
   function (req, res) {
     const errors = validationResult(req);
+    //If validation fails re-renders page with errors
     if (!errors.isEmpty()) {
       return res.render("register", { alert: errors.array() });
     }
@@ -70,7 +72,7 @@ router.post(
         if (err) {
           return next(err);
         }
-        // inserts new users info into database
+        // Inserts new users info into database
         let sqlquery =
           "INSERT INTO users (first_name, last_name, email, hashedPassword) VALUES (?,?,?,?)";
         let newRecord = [firstName, lastName, email, hashedPassword];
@@ -79,18 +81,18 @@ router.post(
           if (err) {
             return next(err);
           }
-          //redirectes users to login page
-          return res.redirect("login");
+          //Redirectes users to login page
+          return res.redirect("/login");
         });
       });
     });
   }
 );
-//login handles login requests
+//Login handles login form submission input validation
 router.post(
   "/loggedin",
   [
-    // validates email format and normalises it
+    // Validates email format and normalises it
     check("email")
       .isEmail()
       .normalizeEmail()
@@ -101,32 +103,32 @@ router.post(
   function (req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      // shows errors on login page
+      // Shows errors on login page
       return res.render("login", { alert: errors.array() });
     }
-    // gets passwords and email form request
+    // Gets passwords and email form request
     const plainPassword = req.body.plainPassword;
     const email = req.body.email;
 
-    //finds the users email
+    //Finds the users email
     let sqlquery = "SELECT * FROM users WHERE email = ?";
     db.query(sqlquery, [email], (err, result) => {
       if (err) {
         return next(err);
       }
-      // shows allert if email is not found
+      //Shows allert if email is not found
       if (result.length === 0) {
         return res.render("login", {
           alert: [{ msg: "Email not found. Please register" }],
         });
       }
-      //compares password to passwords stored in database
+      //Compares password to passwords stored in database
       const hashedPassword = result[0].hashedPassword;
       bcrypt.compare(plainPassword, hashedPassword, function (err, isMatch) {
         if (err) {
           return next(err);
         }
-        //checks if password is correct compares redirect to pages
+        //Checks if password is correct compares redirect to pages
         if (isMatch) {
           req.session.userId = result[0].id;
           return res.redirect("/journal");
@@ -140,15 +142,15 @@ router.post(
   }
 );
 
-//logout route (so users can logout)
+//Logout route (so users can logout)
 router.post("/logout", redirectLogin, (req, res) => {
   //session is destroyed when logged out
   req.session.destroy((err) => {
     if (err) {
       return res.redirect("./");
     }
-    //when logged out redirects to login page
-    res.redirect("./login");
+    //When logged out redirects to login page
+     return res.redirect("/login");
   });
 });
 

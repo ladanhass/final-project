@@ -32,19 +32,22 @@
         </div>
         <% }) %>
           <% } %>
-            <!--settings-->
+            <!--Settings Change password form-->
             <div class="container container-settings mt-5">
               <h1 class="mb-4">Settings</h1>
               <form action="/settings/change-password" method="POST">
                 <h2 class="mb-3">Change Password</h2>
+                <!-- Current password input-->
                 <div class="mb-3">
                   <label for="currentPassword" class="form-label">Current Password</label>
                   <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
                 </div>
+                <!--New password input-->
                 <div class="mb-3">
                   <label for="newPassword" class="form-label">New Password</label>
                   <input type="password" class="form-control" id="newPassword" name="newPassword" required>
                 </div>
+                <!--Confirm password input-->
                 <div class="mb-3">
                   <label for="confirmPassword" class="form-label">Confirm Password</label>
                   <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
@@ -53,18 +56,18 @@
               </form>
             </div>
             </div>
-            <!--logout btn-->
+            <!--Logout btn-->
             <div class="container mt-3">
               <form action="/logout" method="POST">
                 <button type="submit" class=" btn btn-logout btn-primary">Logout</button>
               </form>
             </div>
-            <!--delete account btn-->
+            <!--delete account modal-->
             <div class="container mt-3">
               <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"
                 class="btn btn-delete btn-danger">Delete Acount</button>
             </div>
-            <!--delete modal btn-->
+            <!--delete modal Modal-->
             <div class="modal" tabindex="-1" id="deleteModal" aria-labelledby="deleteModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -78,6 +81,7 @@
                       <strong>This Action Cannot Be Undone</strong>
                     </p>
                   </div>
+                  <!--delete account button-->
                   <div class="modal-footer">
                     <form action="/settings/delete" method="POST">
                       <button type="submit" class="btn btn-deleteFinal btn-danger">Delete my acount</button>
@@ -87,13 +91,10 @@
               </div>
             </div>
             <!-- Bootstrap JavaScript Libraries -->
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-              integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-              crossorigin="anonymous"></script>
-
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-              integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-              crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+              crossorigin="anonymous">
+              </script>
 </body>
 
 </html>

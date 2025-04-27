@@ -1,36 +1,32 @@
+//Imports crypto for encryption and decryption
 const crypto = require("crypto");
+//Load varibles needed from .env file
 require("dotenv").config();
 
-//genertates a random iv and key
-// const key = crypto.randomBytes(16).toString('hex');
-// const iv = crypto.randomBytes(16).toString('hex');
-
-//defines algorithm
+//Defines algorithm used for encryption and decryption
 const algo = "aes-128-cbc";
-//loads iv and key from .env
+// Loads iv and key from .env 
 const key = Buffer.from(process.env.KEY, "hex");
 const iv = Buffer.from(process.env.IV, "hex");
 
 function encrypt(text) {
+  //Creates a cipher using aes-128-cbc algorithm
   const cipher = crypto.createCipheriv(algo, key, iv);
+  //Encrypts text and returns as hexadecimal
   const encrypted = Buffer.concat([
-    cipher.update(Buffer.from(text, "utf-8")),
-    cipher.final(),
+    cipher.update(Buffer.from(text, "utf-8")), // Encrypts text
+    cipher.final(),// Completes encryption
   ]);
   return encrypted.toString("hex");
 }
 function decrypt(encryptedText) {
   const decipher = crypto.createDecipheriv(algo, key, iv);
+    //Decrypts  text and returns as string
   const decrypted = Buffer.concat([
     decipher.update(Buffer.from(encryptedText, "hex")),
-    decipher.final(),
+    decipher.final(),// Completes decryption
   ]);
   return decrypted.toString("utf-8");
 }
-// const orginal = "hello is this encrpted and decrpted "
-//  const encryptedText = encrypt(orginal);
-// console.log(encryptedText);
-// const decryptedText = decrypt(encryptedText);
-// console.log(decryptedText);
-
+//Exports the encrypt and decrypt functions
 module.exports = { encrypt, decrypt };

@@ -1,3 +1,4 @@
+
 /*ensure database exists */
 CREATE DATABASE IF NOT EXISTS havenmind;
 USE havenmind;
@@ -28,3 +29,5 @@ CREATE TABLE IF NOT EXISTS journal(
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+

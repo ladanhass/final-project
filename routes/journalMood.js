@@ -1,3 +1,4 @@
+//Imports necessary modules
 const express = require("express");
 const router = express.Router();
 const { encrypt, decrypt } = require("../utils/encrypt"); //Imports encryption and decryption
@@ -14,9 +15,6 @@ router.get("/", redirectLogin, function (req, res, next) {
 
   db.query(sqlqueryJournal, [req.session.userId], (err, journalResults) => {
     if (err) return next(err); // Handles if query fails
-    //console.log("encrypted: ", entry.entry);
-    // console.log("decrypted text: ", decryptedText);
-    // console.log("decrypted entries: ", journalMap);
     //Maps to hold decrypted journal entries by day
     const journalMap = {};
     //loop through each entries and decrypt text

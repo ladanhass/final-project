@@ -1,4 +1,4 @@
-//import modules
+//Import modules
 var express = require("express");
 var ejs = require("ejs");
 var session = require("express-session");
@@ -6,23 +6,22 @@ var mysql = require("mysql2");
 const crypto = require("crypto");
 require("dotenv").config();
 
-require("../utils/middleWare");
-//port and initialise
-const app = express();
-const port = 8006;
-
-//Used to get iv and key
+//Import utils files
+require("./utils/middleWare");
 require("./utils/encrypt");
-//  const key = crypto.randomBytes(16).toString('hex');
-//  const iv = crypto.randomBytes(16).toString('hex');
-// console.log("generate key:" , key);
-// console.log("generate iv:", iv);
 
+//Port and initialise
+const app = express();
+const port = 8007;
+
+//Set up view engine to ejs
 app.set("view engine", "ejs");
+//Process json data URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
-//creates session
+
+//Session set up 
 app.use(
   session({
     secret: "somerandomstuff",
@@ -34,13 +33,14 @@ app.use(
   })
 );
 
-//database connection
+//MySQL set uo using .env
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
 });
+//Connects Mysql database
 db.connect((err) => {
   if (err) {
     throw err;
@@ -49,7 +49,7 @@ db.connect((err) => {
 });
 global.db = db;
 
-//define routes
+//Define and set up routes for diffrent pages
 const usersRoutes = require("./routes/users");
 app.use("/", usersRoutes);
 const journalMood = require("./routes/journalMood");
@@ -59,10 +59,11 @@ app.use("/settings", settingsRoutes);
 const exerciseRoutes = require("./routes/exercise");
 app.use("/exercise", exerciseRoutes);
 
+//Erorr handling middleware for catching erros 
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).send("something broke");
 });
 
-//starts server
+//starts Server
 app.listen(port, () => console.log(`Node app listening on port ${port}!`));

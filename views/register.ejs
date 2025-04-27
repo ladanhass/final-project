@@ -22,16 +22,7 @@
 <div class="container-fluid p-0 m-0">
   <div class="row">
     <div class=" col-12 col-md-6 p-0  d-none d-md-block">
-      <div class="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active ">
-            <img src="/images/picture.webp" alt="side-picture" class="img-fluid picture-side">
-          </div>
-          <div class="carousel-item">
-            <img src="/images/about3.png" alt="side-picture" class="img-fluid picture-side">
-          </div>
-        </div>
-      </div>
+      <img src="/images/picture.webp" alt="side-picture" class="img-fluid picture-side">
     </div>
     <!--form layout-->
     <div class="col-12 col-md-6 ">
@@ -40,9 +31,12 @@
         <h1 class="mb-3 reg-title"> Create an Account </h1>
       </div>
       <!--Display alert-->
+      <!-- checks if alert is defined and contains any message-->
       <% if (typeof alert !='undefined' && alert.length> 0){ %>
+        <!--loops through each alert-->
         <% alert.forEach(function(error){ %>
           <div class=" alert alert-warning alert-dismissible fade show" role="alert">
+            <!--Displays alert-->
             <%= error.msg %>
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close">
                 <span aria-hidden="true">&times;</span>
@@ -50,8 +44,9 @@
           </div>
           <% }) %>
             <% } %>
-              <!--form-->
-              <!--first name input-->
+              <!--Register form-->
+              <!--Uses POST method to send users data to server -->
+              <!--First name input-->
               <form method="POST" action="/registered">
                 <div class="mb-3">
                   <label for="first name" class="form-label">First Name</label>
@@ -62,19 +57,19 @@
                   <label for="last name" class="form-label">Last Name</label>
                   <input id="last" type="text" name="last" class="form-control" required placeholder="Last Name">
                 </div>
-                <!--email input-->
+                <!--Email input-->
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input id="email" type="text" name="email" class="form-control" required
                     placeholder="email@email.com">
                 </div>
-                <!--password input-->
+                <!--Password input-->
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
                   <input id="password" type="password" name="plainPassword" class="form-control" required
                     placeholder="password">
                 </div>
-                <!--form submit button-->
+                <!--Form submit button-->
                 <div class="d-flex justify-content-center">
                   <input type="submit" class="btn btn-primary btn-auth" value="Register">
                 </div>
@@ -85,23 +80,10 @@
 </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
 <!-- Bootstrap JavaScript Libraries -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-  integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-  integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
+  </script>
 </body>
 
 </html>
