@@ -12,7 +12,7 @@ require("./utils/encrypt");
 
 //Port and initialise
 const app = express();
-const port = 8007;
+const port = 8000;
 
 //Set up view engine to ejs
 app.set("view engine", "ejs");
@@ -33,7 +33,7 @@ app.use(
   })
 );
 
-//MySQL set uo using .env
+//MySQL set up using .env
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -49,7 +49,7 @@ db.connect((err) => {
 });
 global.db = db;
 
-//Define and set up routes for diffrent pages
+//Define and sets up routes for diffrent pages
 const usersRoutes = require("./routes/users");
 app.use("/", usersRoutes);
 const journalMood = require("./routes/journalMood");
@@ -59,7 +59,7 @@ app.use("/settings", settingsRoutes);
 const exerciseRoutes = require("./routes/exercise");
 app.use("/exercise", exerciseRoutes);
 
-//Erorr handling middleware for catching erros 
+//Erorr handling middleware for catching errors 
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).send("something broke");

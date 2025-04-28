@@ -1,9 +1,9 @@
 
-/*ensure database exists */
+/*Ensure database exists */
 CREATE DATABASE IF NOT EXISTS havenmind;
 USE havenmind;
 
-/* table for registering users and login*/
+/* Table for registering users and login*/
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -29,5 +29,7 @@ CREATE TABLE IF NOT EXISTS journal(
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+
 
 

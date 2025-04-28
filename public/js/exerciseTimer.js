@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let isPaused = false;
   let step = 0;
   const steps = ["Inhale", "Hold", "Exhale", "Hold"];
-  //Stars timer
+  //Starts timer
   function startTimer(duration) { 
     timeLeft = duration * 60;//Converts minutes to seconds
     step = 0; 

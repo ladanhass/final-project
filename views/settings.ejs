@@ -20,6 +20,7 @@
 </head>
 
 <body>
+  <!-- Includes Navbar -->
   <%-include('navbar') %>
     <!--Display alert-->
     <% if (typeof alert !='undefined' && alert.length> 0){ %>
@@ -62,12 +63,12 @@
                 <button type="submit" class=" btn btn-logout btn-primary">Logout</button>
               </form>
             </div>
-            <!--delete account modal-->
+            <!--Delete account modal button-->
             <div class="container mt-3">
               <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"
                 class="btn btn-delete btn-danger">Delete Acount</button>
             </div>
-            <!--delete modal Modal-->
+            <!--Delete modal Modal-->
             <div class="modal" tabindex="-1" id="deleteModal" aria-labelledby="deleteModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -81,7 +82,7 @@
                       <strong>This Action Cannot Be Undone</strong>
                     </p>
                   </div>
-                  <!--delete account button-->
+                  <!--Delete account button-->
                   <div class="modal-footer">
                     <form action="/settings/delete" method="POST">
                       <button type="submit" class="btn btn-deleteFinal btn-danger">Delete my acount</button>

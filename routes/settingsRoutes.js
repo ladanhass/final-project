@@ -71,7 +71,7 @@ router.post(
       if (results.length === 0) {
         return res.render("settings", { alert: [{ msg: "User not found" }] });
       }
-      //compares enterd password to user stored hashed password
+      //compares entered password to user stored hashed password
       const isMatch = await bcrypt.compare(
         currentPassword,
         results[0].hashedPassword
