@@ -31,5 +31,6 @@ CREATE TABLE IF NOT EXISTS journal(
 );
 
 
-
+CREATE USER IF NOT EXISTS 'final-project'@'localhost' IDENTIFIED BY 'myFinalproject';
+GRANT ALL PRIVILEGES ON havenmind.* TO 'final-project'@'localhost';
 
