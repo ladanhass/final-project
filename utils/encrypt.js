@@ -9,6 +9,7 @@ const algo = "aes-128-cbc";
 const key = Buffer.from(process.env.KEY, "hex");
 const iv = Buffer.from(process.env.IV, "hex");
 
+
 function encrypt(text) {
   //Creates a cipher using aes-128-cbc algorithm
   const cipher = crypto.createCipheriv(algo, key, iv);
