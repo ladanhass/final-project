@@ -12,7 +12,7 @@ require("./utils/encrypt");
 
 //Port and initialise
 const app = express();
-const port = 8000;
+const port = 8002;
 
 //Set up view engine to ejs
 app.set("view engine", "ejs");
