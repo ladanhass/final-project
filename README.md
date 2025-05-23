@@ -13,6 +13,7 @@ HavenMind strives to provide an impactful tool for those who are struggling with
 -	Mood tracking (graph)
 - 	Breathing exercise 
 -	Settings
+    - [LINK to video of my application](https://goldsmithscollege-my.sharepoint.com/:v:/g/personal/lhass003_campus_goldsmiths_ac_uk/EZDTKi97asFHrzvPbA21xqgB_RYcJUo2aWLfJvixmqVXGQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=wrCc9e)
 
 ## 🛠️ Setup Instructions
 ### Prerequisites
