@@ -11,10 +11,7 @@ HavenMind strives to provide an impactful tool for those who are struggling with
 -	Mood entries 
 -	Mood tracking (graph)
 - 	Breathing exercise 
--	Setting 
-
-
-
+-	Settings
 
 ## 🛠️ Setup Instructions
 ### Prerequisites
